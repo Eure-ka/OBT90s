@@ -33,7 +33,29 @@
 	
 	<context:component-scan
 		base-package="com.oyster.home" />
+	
+	<beans:bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+            <!-- 해당 경로의 모든 xml 파일을 읽어 들인다. -->
+				<beans:value>classpath:tiles/*.xml</beans:value>
+			</beans:list>
+		</beans:property>
 
+	</beans:bean>
+	<!-- tilesVieResolver를 이용하여 화면을 표시한다. -->
+	<beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<beans:property name="order" value="1"></beans:property>
+	</beans:bean>
+    <!-- 일반 viewResolver로 화면을 표시한다. -->
+	<beans:bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="2" />
+	</beans:bean>
 
 
 </beans:beans>

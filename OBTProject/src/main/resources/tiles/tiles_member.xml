@@ -11,9 +11,9 @@
       <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
    </definition>
 
-   <definition name="main" extends="baseLayout">
-      <put-attribute name="title" value="메인페이지" />
-      <put-attribute name="body" value="/WEB-INF/views/main.jsp" />
+   <definition name="mainboard" extends="baseLayout">
+      <put-attribute name="title" value="메인게시판" />
+      <put-attribute name="body" value="/WEB-INF/views/mainboard.jsp" />
    </definition>
 
 
