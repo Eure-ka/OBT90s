@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+  <typeAliases>
+    <!-- <typeAlias type="com.oyster.member.vo.MemberVO" alias="memberVO" /> -->
+    <typeAlias type="com.oyster.free_board.vo.FreeBoardVO" alias="freeBoardVO" />
+    <!-- <typeAlias type="com.oyster.trans_board.vo.FreeBoardVO" alias="transBoardVO" />
+    <typeAlias type="com.oyster.report_board.vo.FreeBoardVO" alias="reportBoardVO" />
+    <typeAlias type="com.oyster.commom.vo.ImageFileVO" alias="imageFileVO" /> -->
+    
+  </typeAliases>
+</configuration>
+
+
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.board">
+	<!-- 리절트 맵 정의 -->
+	<resultMap id="freeResult" type="freeBoardVO">
+	
+		<result property="fb_number" column="fb_number" />
+		<result property="fb_title" column="fb_title" />
+		<result property="fb_content" column="fb_content" />
+		<result property="member_id" column="member_id" />
+		
+		<result property="fb_likenum" column="fb_likenum" />
+		<result property="fb_countnum" column="fb_countnum" />
+		<result property="fb_write_date" column="fb_write_date" />
+	</resultMap>
+
+<select id="listArticles" resultType="freeBoardVO">
+	select * from  free_board
+
+</select>
+  
+</mapper>

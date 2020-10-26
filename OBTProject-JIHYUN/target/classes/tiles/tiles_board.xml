@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+ 
+  <definition name="mainboard" extends="baseLayout">
+      <put-attribute name="title" value="메인게시판" />
+      <put-attribute name="body" value="/WEB-INF/views/mainboard.jsp" />
+</definition>
+
+   <definition name="/board/free_board/fb_listActicles" extends="baseLayout">
+      <put-attribute name="title" value="자유게시판 글목록" />
+      <put-attribute name="body" value="/WEB-INF/views/board/free_board/fb_listActicles.jsp" />
+   </definition>
+   </tiles-definitions>
+   
