@@ -32,13 +32,13 @@ public class MemberControllerImpl implements MemberController {
 
 	ModelAndView mav = new ModelAndView();
 
-	@RequestMapping(value="/*.do" ,method={RequestMethod.POST,RequestMethod.GET})
-	protected  ModelAndView viewForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName=(String)request.getAttribute("viewName");
+	@RequestMapping(value = "/*.do", method = { RequestMethod.POST, RequestMethod.GET })
+	protected ModelAndView viewForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		return mav;
 	}
-	
+
 	@Override
 	@RequestMapping(value = "/standard_login.do", method = RequestMethod.POST)
 	public ModelAndView login(Map<String, String> loginMap, HttpServletRequest request, HttpServletResponse response)

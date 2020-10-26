@@ -23,8 +23,7 @@
 <style>
 header {
 	position: relative;
-	background-color: green;
-	height: 50px;
+	height: 30%;
 	min-height: 25rem;
 	width: 100%;
 	overflow: hidden;
@@ -46,13 +45,13 @@ header .overlay {
 	z-index: 1;
 }
 
-@media ( pointer : coarse) and (hover: none) {
+/* @media ( pointer : coarse) and (hover: none) {
 	header {
 		background:
 			url('http://sandbox.thewikies.com/vfe-generator/images/big-buck-bunny_poster.jpg')
 			black no-repeat center center scroll;
 	}
-}
+} */
 </style>
 <body>
 
@@ -62,10 +61,14 @@ header .overlay {
 		<div class="container h-100">
 			<div class="d-flex text-center h-100">
 				<div class="my-auto w-100 text-white">
-					<h1>헤더</h1>
+					<hr>
+					<hr>
+					<hr>
+					<h1 style="color: white">니즈마켓</h1>
+					<p style="color: white">당신의 상상이 현실이 되는곳</p>
 					<div class="button" style="text-align: right">
-					<button type="button" onclick="#">로그인</button>
-					<button type="button" onclick="#">로그아웃</button>
+					<button type="button" class="btn btn-light">로그인 <i class="fa fa-sign-out"></i></button>
+					<button type="button" class="btn btn-light">회원가입 <i class="fa fa-sign-out"></i></button>
 					</div>
 				</div>
 			</div>

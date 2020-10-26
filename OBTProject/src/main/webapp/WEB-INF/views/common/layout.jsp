@@ -16,12 +16,12 @@
           text-align:center;
         border: 0px solid #bcbcbc;
       }
-      /* #header {
+      #header {
         padding: 5px;
         margin-bottom: 5px;
         border: 0px solid #bcbcbc;
-         background-color: lime;
-      } */
+        background-image: url('https://cdn.pixabay.com/photo/2017/02/01/21/47/cube-2031512_1280.jpg')
+      } 
       
       #sidebar-left {
         width: 15%;
@@ -30,10 +30,10 @@
         margin-right: 5px;
         margin-bottom: 5px;
         float: left;
-         background-color: orange;
-        border: 0px solid #bcbcbc;
-        font-size:10px;
-      }
+        background-color: white;
+        border: 0px bold #bcbcbc;
+        font-size:20px;
+      } 
       #content {
         width: 75%;
         padding: 5px;
