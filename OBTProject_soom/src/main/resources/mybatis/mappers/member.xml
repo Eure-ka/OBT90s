@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.member">
+	<!-- 리절트 맵 정의 -->
+	<resultMap id="memberResult" type="MemberVO">
+		<result property="member_id" column="member_id" />
+		<result property="member_pw" column="member_pw" />
+		<result property="name" column="name" />
+		
+		<result property="gender" column="gender" />
+		
+		<result property="address" column="address" />
+		
+		<result property="joinDate" column="joinDate" />
+		
+		<result property="email_head" column="email_head" />
+		<result property="email_tail" column="email_tail" />
+		<result property="email_naver" column="email_naver" />
+		
+		<result property="birth_year" column="birth_year" />
+		<result property="birth_month" column="birth_month" />
+		<result property="birth_day" column="birth_day" />
+	</resultMap>
+
+	<select id="standard_login" resultType="memberVO"
+		parameterType="java.util.Map">
+	    <![CDATA[
+			select * from member 
+			 where member_id=#{member_id}
+			 and member_pw=#{member_pw}			
+			 
+		]]>
+	</select>
+
+	<select id="selectOverlappedID" parameterType="String"
+		resultType="String">
+		select decode(count(*),1, 'true', 0, 'false')
+		from member
+		where member_id = #{id}
+	</select>
+
+	<insert id="insertNewMember" parameterType="memberVO">
+  <![CDATA[
+    	insert into member(			member_id,
+				 					member_pw,
+                                    name,
+                                    gender,
+                                    address,
+                                    email_head,
+                                    email_tail,
+                                    birth_year,
+                                    birth_month,
+                                    birth_day,
+                                    )
+							 values(#{member_id},
+									#{member_pw},
+									#{member_name},
+									#{gender},
+                                    #{address},
+                                    #{email_head},
+                                    #{email_tail},
+                                    #{birth_year},
+                                    #{birth_month},
+                                    #{birth_day}
+                                    )
+   ]]>
+	</insert>
+</mapper>
