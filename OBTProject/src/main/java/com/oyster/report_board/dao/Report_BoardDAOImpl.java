@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+
+import com.oyster.report_board.dao.Report_BoardDAO;
 import com.oyster.report_board.vo.Report_boardVO;
 
 
@@ -17,28 +19,48 @@ public class Report_BoardDAOImpl implements Report_BoardDAO{
 	private SqlSession sqlSession;
 
 	@Override
-	public List selectAllArticlesList() throws DataAccessException {
-		List<Report_boardVO> articlesList = sqlSession.selectList("mapper.board.selectAllArticlesList");
+	public List<Report_boardVO> selectAllArticlesList() throws DataAccessException {
+		List<Report_boardVO> articlesList = sqlSession.selectList("mapper.report_Board.selectAllArticlesList");
 		return articlesList;
 	}
 	
 	@Override
 	public void deleteArticle(int rb_number) throws DataAccessException {
-		sqlSession.delete("mapper.board.deleteArticle", rb_number);
+		System.out.println("다오 도착했어요");
+		sqlSession.delete("mapper.report_Board.deleteArticle", rb_number);
 		
 	}
 	
 	@Override
 	public int insertNewArticle(Map articleMap) throws DataAccessException {
 		//마지막 게시글 번호에 1을 더한 숫자를 받아옴
-		int articleNO = selectNewArticleNO();
+		int rb_number = selectNewArticleNO();
 		//매개변수로 받은 맵에 글번호 추가
-		articleMap.put("articleNO", articleNO);
-		sqlSession.insert("mapper.board.insertNewArticle",articleMap);
-		return articleNO;
+		articleMap.put("rb_number", rb_number);
+		sqlSession.insert("mapper.report_Board.insertNewArticle",articleMap);
+		return rb_number;
 	}
 	
 	private int selectNewArticleNO() throws DataAccessException {
-		return sqlSession.selectOne("mapper.board.selectNewArticleNO");
+		return sqlSession.selectOne("mapper.report_Board.selectNewArticleNO");
 	}
+//	private int selectNewImageFileNO() throws DataAccessException {
+//		return sqlSession.selectOne("mapper.report_Board.selectNewImageFileNO");
+//	}
+	
+	@Override
+	public Report_boardVO selectArticle(int rb_number) throws DataAccessException {
+		return sqlSession.selectOne("mapper.report_Board.selectArticle", rb_number);
+	}
+
+	@Override
+	public void boardHit(int rb_number) throws Exception {
+		// TODO Auto-generated method stub
+		sqlSession.update("mapper.report_Board.boardHit", rb_number);
+	}
+//	@Override
+//	public List selectImageFileList(int rb_number) throws DataAccessException {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 }

@@ -61,9 +61,9 @@ header .overlay {
 		<div class="container h-100">
 			<div class="d-flex text-center h-100">
 				<div class="my-auto w-100 text-white">
-					<hr>
-					<hr>
-					<hr>
+					<br>
+					<br>
+					<br>
 					<h1 style="color: white">니즈마켓</h1>
 					<p style="color: white">당신의 상상이 현실이 되는곳</p>
 					<div class="button" style="text-align: right">

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component("report_boardVO")
 public class Report_boardVO {
+	private int rb_level;
     private int rb_number;
     private String rb_title;
     private String rb_content;
@@ -62,6 +63,13 @@ public class Report_boardVO {
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
+	public int getRb_level() {
+		return rb_level;
+	}
+	public void setRb_level(int rb_level) {
+		this.rb_level = rb_level;
+	}
+	
 	
 	
 	

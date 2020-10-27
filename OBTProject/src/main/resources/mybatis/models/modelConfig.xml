@@ -3,16 +3,20 @@
    "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+  <settings>
+     <setting value="VARCHAR" name="jdbcTypeForNull"/>
+     <setting value="DATE" name="jdbcTypeForNull"/>
+     <setting value="INTEGER" name="jdbcTypeForNull"/>
+ </settings>
   <typeAliases>
     <typeAlias type="com.oyster.member.vo.MemberVO" alias="memberVO" />
-    <!-- <typeAlias type="com.oyster.commom.vo.ImageFileVO" alias="imageFileVO" />
-    <typeAlias type="com.oyster.free_board.vo.FreeBoardVO" alias="freeBoardVO" />
-    <typeAlias type="com.oyster.trans_board.vo.transBoardVO" alias="transBoardVO" />  -->
+    <!-- <typeAlias type="com.oyster.report_board.vo.ImageVO" alias="imageVO" /> -->
+    <!-- <typeAlias type="com.oyster.free_board.vo.FreeBoardVO" alias="freeBoardVO" />
+    <typeAlias type="com.oyster.trans_board.vo.transBoardVO" alias="transBoardVO" /> -->
     <typeAlias type="com.oyster.report_board.vo.Report_boardVO" alias="reportBoardVO" />
-    
   </typeAliases>
-</configuration>
 
+</configuration>
 
 
 
