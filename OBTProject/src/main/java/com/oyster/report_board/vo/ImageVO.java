@@ -7,6 +7,7 @@ import java.sql.Date;
 public class ImageVO {
 	private int image_no;
 	private int rb_number;
+	private String imageFileName;
 	
 	public int getImage_no() {
 		return image_no;
@@ -20,4 +21,12 @@ public class ImageVO {
 	public void setRb_number(int rb_number) {
 		this.rb_number = rb_number;
 	}
+	public String getImageFileName() {
+		return imageFileName;
+	}
+	public void setImageFileName(String imageFileName) {
+		this.imageFileName = imageFileName;
+	}
+	
+	
 }

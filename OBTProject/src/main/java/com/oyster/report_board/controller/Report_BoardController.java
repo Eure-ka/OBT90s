@@ -20,7 +20,7 @@ public interface Report_BoardController {
 	public ResponseEntity removeArticle(@RequestParam("rb_number") int rb_number, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
 
-	public ResponseEntity addNewArticle(HttpServletRequest request, HttpServletResponse response)
+	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception;
 
 	public ModelAndView viewArticle(@RequestParam("rb_number") int rb_number, HttpServletRequest request,

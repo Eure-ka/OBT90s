@@ -14,7 +14,7 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script type="text/javascript">
-   /* function readURL(input) {
+   /function readURL(input) {
       if (input.files && input.files[0]) {
     	  //console.log(input);
     	  //console.log($(this)); //Window
@@ -27,29 +27,29 @@
           }
          reader.readAsDataURL(input.files[0]);
       }
-  }   */
+  }  
   function backToList(obj){
     obj.action="${contextPath}/board/report_boardlist.do";
     obj.submit();
   }
   
-  /* var cnt=0;
+  var cnt=0;
   function fn_addFile(){
      cnt++;
-     /* $("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />"); */
+     $("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />"); */
      $("#d_file").append("<tr><td>"+"<input type='file' name='file"+cnt+"' onchange='readURL(this);' /></td><td><img class='preview' scr='#' width=200 height=200/></td></tr>");
-  }   */
+  } 
 
 </script>
  <title>글쓰기창</title>
 </head>
 <body>
 <h1 style="text-align:center">글쓰기</h1>
-  <form name="articleForm" method="post" action="${contextPath}/board/addNewreport_board.do" >
+  <form name="articleForm" method="post" action="${contextPath}/board/addNewreport_board.do" enctype="multipart/form-data">
     <table border="1" align="center">
       <tr>
 			<td align="right"> 작성자</td>
-			<td colspan=2  align="left"><input type="text" size="20" maxlength="100"  <%-- value="${member.name }" readonly --%>/> </td>
+			<td colspan=2  align="left"><input type="text" size="20" maxlength="100"  value="${memberInfo.name}" readonly ></td>
 			</tr>
 	     <tr>
 			   <td align="right">글제목: </td>
@@ -59,7 +59,7 @@
 				<td align="right" valign="top"><br>글내용: </td>
 				<td colspan=2><textarea name="content" rows="10" cols="65" maxlength="4000"></textarea> </td>
      </tr>
-     <!-- <tr>
+     <tr>
 			  <td align="right">이미지파일 첨부:  </td>
 			  <td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td>
 			  <td><img class="preview" src="#"   width=200 height=200/></td>
@@ -72,7 +72,7 @@
 	   
 	   <tr id="d_file"> 
 	      
-	   </tr> -->
+	   </tr>
 	    <tr>
 	      <td align="right"> </td>
 	      <td colspan="2">

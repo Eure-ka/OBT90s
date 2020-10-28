@@ -123,7 +123,7 @@
    </td>  
   </tr>
  
-<%--  <c:if test="${not empty imageFileList && imageFileList!='null' }">
+ <c:if test="${not empty imageFileList && imageFileList!='null' }">
 	  <c:forEach var="item" items="${imageFileList}" varStatus="status" >
 		    <tr>
 			    <td width="150" align="center" bgcolor="#FF9933"  rowspan="2">
@@ -176,7 +176,7 @@
 				    </td>
 			  </tr>-
 		 </c:otherwise>
-	 </c:choose>--%>
+	 </c:choose>
   <tr>
 	   <td width="150" align="center" bgcolor="#FF9933">
 	      등록일자
@@ -194,11 +194,10 @@
     
   <tr  id="tr_btn"    >
    <td colspan="2" align="center">
-   		<!-- 로그인 구현되면 다시 풀어서 확인 -->
-       <%-- <c:if test="${member.member_id == articleMap.member_id}"> --%>
+       <c:if test="${member.member_id == articleMap.member_id}"> 
 	      <input type=button value="수정하기" onClick="fn_enable(this.form)">
 	      <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removereport_board.do' , ${articleMap.rb_number})">
-	    <%-- </c:if> --%>
+	    </c:if>
 	    <input type=button value="리스트로 돌아가기"  onClick="backToList(this.form)">
 	    <!-- 나중에 한번 더 수정필요 -->
 	     <input type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/report_boardReplyForm.do', ${articleMap.rb_number})">

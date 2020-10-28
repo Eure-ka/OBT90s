@@ -26,7 +26,6 @@ public class Report_BoardDAOImpl implements Report_BoardDAO{
 	
 	@Override
 	public void deleteArticle(int rb_number) throws DataAccessException {
-		System.out.println("다오 도착했어요");
 		sqlSession.delete("mapper.report_Board.deleteArticle", rb_number);
 		
 	}
@@ -35,9 +34,12 @@ public class Report_BoardDAOImpl implements Report_BoardDAO{
 	public int insertNewArticle(Map articleMap) throws DataAccessException {
 		//마지막 게시글 번호에 1을 더한 숫자를 받아옴
 		int rb_number = selectNewArticleNO();
+		
 		//매개변수로 받은 맵에 글번호 추가
 		articleMap.put("rb_number", rb_number);
 		sqlSession.insert("mapper.report_Board.insertNewArticle",articleMap);
+		System.out.println("dao 게시글 번호 확인>>>"+rb_number);
+		System.out.println("다오 articleMap>>>>>>>>>>"+articleMap);
 		return rb_number;
 	}
 	

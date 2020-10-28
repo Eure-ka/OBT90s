@@ -30,13 +30,13 @@ public class Report_BoardSerivceImpl implements Report_BoardSerivce {
 	public int addNewArticle(Map articleMap) throws Exception {
 		int rb_number = report_Boarddao.insertNewArticle(articleMap);
 		articleMap.put("rb_number", rb_number);
-		/* Report_Boarddao.insertNewImage(articleMap); */
+		report_Boarddao.insertNewArticle(articleMap);
+		System.out.println("서비스 articleMap>>>>>>"+articleMap);
 		return rb_number;
 	}
 
 	@Override
 	public void removeArticle(int rb_number) throws Exception {
-		//System.out.println("서비스 도착했어요");
 		report_Boarddao.deleteArticle(rb_number);
 	}
 
@@ -49,6 +49,9 @@ public class Report_BoardSerivceImpl implements Report_BoardSerivce {
 //		articleMap.put("imageFileList", imageFileList);
 //		return report_boardvo;
 //	}
+	
+	
+	//조회수 올리기 기능
 	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
 	public Report_boardVO viewArticle(int rb_number) throws Exception {
@@ -57,13 +60,6 @@ public class Report_BoardSerivceImpl implements Report_BoardSerivce {
 		return report_boardVO;
 	}
 	
-	/*
-	 * @Transactional(isolation = Isolation.READ_COMMITTED)
-	 * 
-	 * @Override public Report_boardVO read(int rb_number) throws Exception {
-	 * report_Boarddao.boardHit(rb_number); return report_Boarddao.read(int
-	 * rb_number); }
-	 */
 	// 수정
 	/*
 	 * @Override public void modArticle(Map articleMap) throws Exception {

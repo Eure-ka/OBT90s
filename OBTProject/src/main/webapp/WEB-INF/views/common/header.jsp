@@ -55,8 +55,7 @@ header .overlay {
 </style>
 <body>
 
-
-	<header>
+<header>
 		<div class="overlay"></div>
 		<div class="container h-100">
 			<div class="d-flex text-center h-100">
@@ -67,22 +66,22 @@ header .overlay {
 					<h1 style="color: white">니즈마켓</h1>
 					<p style="color: white">당신의 상상이 현실이 되는곳</p>
 					<div class="button" style="text-align: right">
-					<button type="button" class="btn btn-light">로그인 <i class="fa fa-sign-out"></i></button>
-					<button type="button" class="btn btn-light">회원가입 <i class="fa fa-sign-out"></i></button>
+					<button type="button" onclick="location.href='${contextPath}/member/loginForm.do'"class="btn btn-light" >로그인 <i class="fa fa-sign-out"></i></button>
+					<button type="button" onclick="location.href='${contextPath}/member/memberForm.do'" class="btn btn-light" >회원가입 <i class="fa fa-sign-out"></i></button>
 					</div>
 				</div>
 			</div>
 		</div>
 		
 		
-		<%-- <table border=0 width="1
+		 <table border=0 width="1
 	00%">
 			<tr>
 				<td>
 					<a href="#" style="color:white"><h3>로그인</h3></a>
 					 <c:choose>
-						<c:when test="${isLogOn == true  && member!= null}">
-							<h3>환영합니다. ${member.name }님!</h3>
+						<c:when test="${memberInfo != null }">
+							<h3>환영합니다. ${memberInfo.name }님!</h3>
 							<a href="${contextPath}/member/logout.do"><h3>로그아웃</h3></a>
 						</c:when>
 						<c:otherwise>
@@ -91,7 +90,7 @@ header .overlay {
 					</c:choose>
 				</td>
 			</tr>
-		</table> --%>
+		</table> 
 	</header>
 
 

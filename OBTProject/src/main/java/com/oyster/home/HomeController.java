@@ -30,6 +30,11 @@ public class HomeController {
 		
 		return "main";
 	}
+	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
+	public String main(Locale locale, Model model) {
+		
+		return "main";
+	}
 	
 	@RequestMapping(value = "/mainboard.do", method = RequestMethod.GET)
 	public String mainboard(Locale locale, Model model) {
