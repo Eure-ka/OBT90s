@@ -34,7 +34,7 @@
 
 <body>
  <h1>답글쓰기</h1>
-  <form name="frmReply" method="post"  action="${contextPath}/board/report_boardReplyForm.do" enctype="multipart/form-data">
+  <form name="frmReply" method="post"  action="${contextPath}/board/rb_board/report_boardReplyForm.do" enctype="multipart/form-data">
     <table>
     <tr>
 			<td align="right"> 작성자:&nbsp; </td>

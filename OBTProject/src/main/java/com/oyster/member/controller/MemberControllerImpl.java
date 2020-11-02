@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.oyster.member.vo.MemberVO;
 import com.oyster.member.service.MemberService;
@@ -42,13 +41,13 @@ public class MemberControllerImpl implements MemberController {
 	
 	@Override
 	@RequestMapping(value = "/standard_login.do", method = RequestMethod.POST)
-	public ModelAndView login(@RequestParam Map<String, String> loginMap,RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)
+	public ModelAndView login(@RequestParam Map<String, String> loginMap, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		memberVO = memberService.standard_login(loginMap);
 		if (memberVO != null && memberVO.getMember_id() != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("memberInfo", memberVO);
-			//session.setAttribute("isLogin", true);
+			session.setAttribute("isLogin", true);
 
 			String action = (String) session.getAttribute("action");
 			if (action != null && action.equals("/main.do") ) {
@@ -71,13 +70,13 @@ public class MemberControllerImpl implements MemberController {
 		HttpSession session = request.getSession();
 		session.setAttribute("isLogin", false);
 		session.removeAttribute("memberInfo");
-		mav.setViewName("redirect:/");
+		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
 
 	@Override
 	@RequestMapping(value = "/addMember.do", method = RequestMethod.POST)
-	public ResponseEntity addMember(MemberVO member, HttpServletRequest request, HttpServletResponse response)
+	public ResponseEntity addMember(@ModelAttribute("memberVO") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");

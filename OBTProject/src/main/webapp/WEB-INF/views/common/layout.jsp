@@ -4,13 +4,37 @@
  <!-- 자바의 import 같이 아래 문장을 꼭 추가 해주어야 tiles 사용 가능 -->
  <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
- 
+ <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
-    <style>
-       container {
+    <!-- Bootstrap core CSS -->
+<%-- <link href="${contextPath }/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> --%>
+<!--  Custom styles for this template -->
+<link href="<%=application.getContextPath() %>/resources/css/simple-sidebar.css" rel="stylesheet">
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link href="${contextPath }/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+	type="text/css">
+<link
+	href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic'
+	rel='stylesheet' type='text/css'>
+<link
+	href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+	rel='stylesheet' type='text/css'>
+<link href="${contextPath }/resources/css/clean-blog.min.css" rel="stylesheet">
+<script src="${contextPath }/resources/vendor/jquery/jquery.min.js"></script>
+	<script src="${contextPath }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="${contextPath }/resources/js/clean-blog.min.js"></script>
+<style>
+      #container {
         width: 100%;
         margin: 0px auto;
           text-align:center;
@@ -20,20 +44,12 @@
         padding: 5px;
         margin-bottom: 5px;
         border: 0px solid #bcbcbc;
-        background-image: url('https://cdn.pixabay.com/photo/2017/02/01/21/47/cube-2031512_1280.jpg')
-      } 
-      
+      }
       #sidebar-left {
-        width: 15%;
-        height:700px;
-        padding: 5px;
-        margin-right: 5px;
-        margin-bottom: 5px;
+        width: 20%;
         float: left;
-        background-color: white;
-        border: 0px bold #bcbcbc;
-        font-size:20px;
-      } 
+        
+      }
       #content {
         width: 75%;
         padding: 5px;
@@ -45,11 +61,13 @@
         clear: both;
         padding: 5px;
         border: 0px solid #bcbcbc;
-         background-color: gray;
-      } */
+      }
       
     </style>
+    
+    
     <title><tiles:insertAttribute name="title" /></title>
+    
   </head>
     <body>
     <div id="container">

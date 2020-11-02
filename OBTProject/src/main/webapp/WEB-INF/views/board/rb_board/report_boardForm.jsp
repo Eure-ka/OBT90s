@@ -14,7 +14,7 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script type="text/javascript">
-   /function readURL(input) {
+   function readURL(input) {
       if (input.files && input.files[0]) {
     	  //console.log(input);
     	  //console.log($(this)); //Window
@@ -22,22 +22,25 @@
     	  console.log($(input).find('.preview'));
          var reader = new FileReader();
          reader.onload = function (e) {
-        	 //console.log($(this)); //0: FileReader {readyState: 2, result: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAAEAYABgAAD…wIe33D9KHuMZ2FNCYL1oBCnpSKYo6/hQLqB60DQdhQAUwP//Z", error: null, onloadstart: null, onprogress: null, …}
         	 $(input).parent().next().find('.preview').attr('src', e.target.result);
           }
          reader.readAsDataURL(input.files[0]);
       }
   }  
   function backToList(obj){
-    obj.action="${contextPath}/board/report_boardlist.do";
-    obj.submit();
-  }
+	    obj.action="${contextPath}/board/rb_board/report_boardlist.do";
+	    obj.submit();
+   }
   
-  var cnt=0;
+  
   function fn_addFile(){
-     cnt++;
-     $("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />"); */
-     $("#d_file").append("<tr><td>"+"<input type='file' name='file"+cnt+"' onchange='readURL(this);' /></td><td><img class='preview' scr='#' width=200 height=200/></td></tr>");
+	  var cnt=1;
+	  /*  $("#d_file").append("<input type='file' name="file"+cnt+' onchange='readURL(this);' /></td><td><img class='preview' scr='#' width=200 height=200/>");) */
+	  $("file_add").on("click",function(){
+		  $("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />")
+		     cnt++;
+	  });
+    
   } 
 
 </script>
@@ -45,7 +48,7 @@
 </head>
 <body>
 <h1 style="text-align:center">글쓰기</h1>
-  <form name="articleForm" method="post" action="${contextPath}/board/addNewreport_board.do" enctype="multipart/form-data">
+  <form name="articleForm" method="post" action="${contextPath}/board/rb_board/addNewreport_board.do" enctype="multipart/form-data">
     <table border="1" align="center">
       <tr>
 			<td align="right"> 작성자</td>
@@ -53,26 +56,22 @@
 			</tr>
 	     <tr>
 			   <td align="right">글제목: </td>
-			   <td colspan="2"><input type="text" size="67"  maxlength="500" name="title" /></td>
+			   <td colspan="2"><input type="text" size="67"  maxlength="500" name="rb_title" /></td>
 		 </tr>
 	 		<tr>
 				<td align="right" valign="top"><br>글내용: </td>
-				<td colspan=2><textarea name="content" rows="10" cols="65" maxlength="4000"></textarea> </td>
+				<td colspan=2><textarea name="rb_content" rows="10" cols="65" maxlength="4000"></textarea> </td>
      </tr>
      <tr>
-			  <td align="right">이미지파일 첨부:  </td>
-			  <td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td>
-			  <td><img class="preview" src="#"   width=200 height=200/></td>
+			  <td align="right">이미지파일 첨부:  
+			  <button class="file_add" type="button">파일추가</button>
+			  <div  id="d_file">
+			  </td>
+			  <td></div></td>
+			  <!-- <td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td> -->
+			  <!-- <td><img class="preview" src="#"   width=200 height=200/></td> -->
 			  
-		</tr>
-		<tr>	  
-				<td align="left"> <input type="button" value="파일 추가" onClick="fn_addFile()"/></td>
-		</tr>		
-				
-	   
-	   <tr id="d_file"> 
-	      
-	   </tr>
+	</tr>
 	    <tr>
 	      <td align="right"> </td>
 	      <td colspan="2">

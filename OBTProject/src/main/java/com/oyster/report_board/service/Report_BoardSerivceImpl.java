@@ -29,9 +29,11 @@ public class Report_BoardSerivceImpl implements Report_BoardSerivce {
 	@Override
 	public int addNewArticle(Map articleMap) throws Exception {
 		int rb_number = report_Boarddao.insertNewArticle(articleMap);
+		System.out.println("써비스 report_Boarddao.insertNewArticle(articleMap)>>>>>>>>>>>>>>>>>"+rb_number);
 		articleMap.put("rb_number", rb_number);
-		report_Boarddao.insertNewArticle(articleMap);
-		System.out.println("서비스 articleMap>>>>>>"+articleMap);
+		System.out.println("써비스 articleMap>>>>>>>>>>>>>>>>>"+articleMap);
+		report_Boarddao.insertNewImage(articleMap);
+		
 		return rb_number;
 	}
 
@@ -39,26 +41,27 @@ public class Report_BoardSerivceImpl implements Report_BoardSerivce {
 	public void removeArticle(int rb_number) throws Exception {
 		report_Boarddao.deleteArticle(rb_number);
 	}
-
-//	@Override
-//	public Report_boardVO viewArticle(int rb_number) throws Exception {
-//		Map articleMap = new HashMap();
-//		Report_boardVO report_boardvo = report_Boarddao.selectArticle(rb_number);
-//		List<ImageVO> imageFileList = report_Boarddao.selectImageFileList(rb_number);
-//		articleMap.put("article", report_Boarddao);
-//		articleMap.put("imageFileList", imageFileList);
-//		return report_boardvo;
-//	}
 	
 	
-	//조회수 올리기 기능
 	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
-	public Report_boardVO viewArticle(int rb_number) throws Exception {
-		Report_boardVO report_boardVO = report_Boarddao.selectArticle(rb_number);
+	public Map viewArticle(int rb_number) throws Exception {
+		Map articleMap = new HashMap();
+		Report_boardVO report_boardvo = report_Boarddao.selectArticle(rb_number);
+		List<ImageVO> imageFileList = report_Boarddao.selectImageFileList(rb_number);
+		articleMap.put("article", report_boardvo);
+		articleMap.put("imageFileList", imageFileList);
 		report_Boarddao.boardHit(rb_number);
-		return report_boardVO;
+		return articleMap;
 	}
+	
+	
+	//원래 뷰 아티클
+	/*
+	 * @Override public Report_boardVO viewArticle(int rb_number) throws Exception {
+	 * Report_boardVO report_boardVO = report_Boarddao.selectArticle(rb_number);
+	 * report_Boarddao.boardHit(rb_number); return report_boardVO; }
+	 */
 	
 	// 수정
 	/*
