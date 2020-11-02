@@ -63,7 +63,6 @@ public class Report_BoardController  {
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
 			report_boardserivce.removeArticle(rb_number);
-
 			message = "<script>";
 			message += " alert('글을 삭제했습니다.');";
 			message += " location.href='" + request.getContextPath() + "/board/rb_board/report_boardlist.do';";

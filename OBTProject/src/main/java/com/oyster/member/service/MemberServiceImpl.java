@@ -17,9 +17,10 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDAO memberDAO;
 
 	@Override
-	public MemberVO standard_login(Map loginMap) throws Exception {
-		return memberDAO.standard_login(loginMap);
-	}
+	   public MemberVO standard_login(MemberVO memberVO) throws Exception {
+	      System.out.println("들어왔느뇨" + memberDAO.standard_login(memberVO));
+	      return memberDAO.standard_login(memberVO);
+	   }
 
 	@Override
 	public void addMember(MemberVO memberVO) throws Exception {
@@ -32,5 +33,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectOverlappedID(id);
 	}
 	
+	@Override
+	public void removeMember(MemberVO memberVO) throws Exception {
+		System.out.println("서비스 memberVO>>>>>>>"+memberVO);
+		memberDAO.removeMember(memberVO);
+	}
 	
 }

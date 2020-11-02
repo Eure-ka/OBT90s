@@ -87,7 +87,6 @@
  </script>
 </head>
 <body>
-    <%--  ${articleMap.imageFileList.imageFileName} --%>
   <form name="frmArticle" method="post"  action="${contextPath}/board/rb_board/report_boardView.do">
   <table  border=0  align="center">
   <tr>

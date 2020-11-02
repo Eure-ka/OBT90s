@@ -61,10 +61,10 @@ header .overlay {
 
 					<li class="nav-item"><c:choose>
 							<c:when test="${memberInfo != null }">
-								<a class="nav-link" href="#">회원정보</a>
+								<a class="nav-link" href="${contextPath}/member/memberInfo.do">회원정보</a>
 							</c:when>
 							<c:otherwise>
-								<a class="nav-link" href="contact.html">회원가입</a>
+								<a class="nav-link" href="${contextPath}/member/memberForm.do">회원가입</a>
 							</c:otherwise>
 						</c:choose></li>
 				</ul>

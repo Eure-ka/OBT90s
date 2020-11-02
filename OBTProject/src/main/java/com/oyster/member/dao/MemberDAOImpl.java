@@ -16,10 +16,11 @@ public class MemberDAOImpl implements MemberDAO {
 	private SqlSession sqlSession;
 	
 	@Override
-	public MemberVO standard_login(Map loginMap) {
-		MemberVO member = (MemberVO)sqlSession.selectOne("mapper.member.standard_login",loginMap);
-		return member;
-	}
+	   public MemberVO standard_login(MemberVO memberVO) {
+	      MemberVO member = (MemberVO)sqlSession.selectOne("mapper.member.standard_login",memberVO);
+	      System.out.println("왔니?" + member);
+	      return member;
+	   }
 
 	@Override
 	public void insertNewMember(MemberVO memberVO) throws DataAccessException {
@@ -31,4 +32,11 @@ public class MemberDAOImpl implements MemberDAO {
 		String result =  sqlSession.selectOne("mapper.member.selectOverlappedID",id);
 		return result;
 	}
+	
+	@Override
+	public void removeMember(MemberVO memberVO) throws DataAccessException {
+		System.out.println("다오 memberVO>>>>>>>"+memberVO);
+		sqlSession.insert("mapper.member.memberDelete",memberVO);
+	}
+	
 }

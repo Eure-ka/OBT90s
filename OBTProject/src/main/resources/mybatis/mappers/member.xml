@@ -25,13 +25,10 @@
       <result property="birth_day" column="birth_day" />
    </resultMap>
 
-   <select id="standard_login" resultType="memberVO"
-      parameterType="java.util.Map">
+   <select id="standard_login" resultType="memberVO">
        <![CDATA[
          select * from member 
-          where member_id=#{member_id}
-          and member_pw=#{member_pw}         
-          
+          where member_id=#{member_id}      
       ]]>
    </select>
 
@@ -52,7 +49,8 @@
                                     birth_month,
                                     birth_day,
                                     email_head,
-                                    email_tail
+                                    email_tail,
+                                    joinDate
                                     )
                       values(#{member_id},
                            #{member_pw},
@@ -62,8 +60,14 @@
                                     #{birth_month},
                                     #{birth_day},
                                     #{email_head},
-                                    #{email_tail}
+                                    #{email_tail},
+                                    sysdate
                                     )
    ]]>
    </insert>
+   
+   <delete id="memberDelete">
+	DELETE FROM member
+	WHERE member_id = #{member_id}
+</delete>
 </mapper>
