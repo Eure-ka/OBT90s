@@ -3,15 +3,60 @@
 "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
 "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
- 
-  <definition name="mainboard" extends="baseLayout">
-      <put-attribute name="title" value="메인게시판" />
-      <put-attribute name="body" value="/WEB-INF/views/mainboard.jsp" />
-</definition>
+<!-- 자유게시판 -->
+	<definition name="/board/fb_board/fb_listArticles" extends="baseLayout">
+		<put-attribute name="title" value="자유게시판 글목록" />
+		<put-attribute name="body" value="/WEB-INF/views/board/fb_board/fb_listArticles.jsp" />
+	</definition>
+	
+	<definition name="/board/fb_board/fb_viewArticle" extends="baseLayout">
+		<put-attribute name="title" value="자유게시판 글보기" />
+		<put-attribute name="body" value="/WEB-INF/views/board/fb_board/fb_viewArticle.jsp" />
+	</definition>
+		
+	<definition name="/board/fb_board/fb_articleForm" extends="baseLayout">
+		<put-attribute name="title" value="자유게시판 글쓰기" />
+		<put-attribute name="body" value="/WEB-INF/views/board/fb_board/fb_articleForm.jsp" />
+	</definition>
 
-   <definition name="/board/free_board/fb_listActicles" extends="baseLayout">
-      <put-attribute name="title" value="자유게시판 글목록" />
-      <put-attribute name="body" value="/WEB-INF/views/board/free_board/fb_listActicles.jsp" />
+<!-- 거래게시판 -->	
+	<definition name="/board/tb_board/tb_articleForm" extends="baseLayout">
+		<put-attribute name="title" value="거래게시판 글쓰기" />
+		<put-attribute name="body" value="/WEB-INF/views/board/tb_board/tb_articleForm.jsp" />
+	</definition>
+	
+	<definition name="/board/tb_board/tb_listArticles" extends="baseLayout">
+		<put-attribute name="title" value="거래게시판 글목록" />
+		<put-attribute name="body" value="/WEB-INF/views/board/tb_board/tb_listArticles.jsp" />
+	</definition>
+	
+	<definition name="/board/tb_board/tb_viewArticle" extends="baseLayout">
+		<put-attribute name="title" value="거래게시판 글보기" />
+		<put-attribute name="body" value="/WEB-INF/views/board/tb_board/tb_viewArticle.jsp" />
+	</definition>
+
+<!-- 신고게시판 -->	
+	 <definition name="/board/rb_board/report_boardlist" extends="baseLayout">
+      <put-attribute name="title" value="신고게시판" />
+      <put-attribute name="body" value="/WEB-INF/views/board/rb_board/report_boardlist.jsp" />
    </definition>
-   </tiles-definitions>
+   
+
+    
+   <definition name="/board/rb_board/report_boardForm" extends="baseLayout">
+      <put-attribute name="title" value="신고 게시판 글쓰기창" />
+      <put-attribute name="body" value="/WEB-INF/views/board/rb_board/report_boardForm.jsp" />
+   </definition>
+      
+
+   <definition name="/board/rb_board/report_boardView" extends="baseLayout">
+      <put-attribute name="title" value="글보기" />
+      <put-attribute name="body" value="/WEB-INF/views/board/rb_board/report_boardView.jsp" />
+   </definition>
+   
+   <definition name="/board/rb_board/report_boardReplyForm" extends="baseLayout">
+      <put-attribute name="title" value="답글 달기" />
+      <put-attribute name="body" value="/WEB-INF/views/board/rb_board/report_boardReplyForm.jsp" />
+   </definition>
+</tiles-definitions>
    

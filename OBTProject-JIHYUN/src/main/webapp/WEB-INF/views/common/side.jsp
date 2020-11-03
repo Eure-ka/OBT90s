@@ -22,9 +22,9 @@
 <body>
 	<p>게시판 목록</p>
 	<p>
-		<a href="${contextPath}/board/fb_list"  class="no-underline">자유게시판</a><br>
-	    <a href="#"  class="no-underline">거래게시판</a><br>
-	    <a href="#"  class="no-underline">신고게시판</a><br>
+		<a href="${contextPath}/board/fb_board/fb_listArticles.do"  class="no-underline">자유게시판</a><br>
+	    <a href="${contextPath}/board/tb_board/tb_listArticles.do"  class="no-underline">거래게시판</a><br>
+	    <a href="${contextPath}/board/rb_board/report_boardlist.do"  class="no-underline">신고게시판</a><br>
     </p>
 	<%-- 
 	<h1>

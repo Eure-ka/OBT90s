@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.report_Board">
+	<resultMap id="articlesResult" type="reportBoardVO">
+		<result property="rb_level" column="rb_level" />
+		<result property="rb_number" column="rb_number" />
+		<result property="rb_title" column="rb_title" />
+		<result property="parent_no" column="parent_no" />
+		<result property="write_date" column="write_date" />
+		<result property="rb_countnum" column="rb_countnum" />
+		<result property="rb_likenum" column="rb_likenum" />
+		<result property="member_id" column="member_id" />
+	</resultMap>
+
+	<resultMap id="imgResult" type="imageVO"> <result property="image_no" 
+		column="image_no" /> <result property="rb_number" column="rb_number" /> </resultMap>
+
+	<select id="selectAllArticlesList" resultMap="articlesResult">
+    <![CDATA[
+      SELECT *
+      from report_board		
+    ]]>
+	</select>
+
+	<insert id="insertNewArticle" parameterType="java.util.Map">
+		<![CDATA[
+			INSERT into REPORT_BOARD(rb_number,  rb_title, rb_content,member_id)
+			VALUES(#{rb_number},#{rb_title},	#{rb_content},#{member_id})
+		]]>
+	</insert>
+
+
+
+
+	<select id="selectArticle" resultType="reportBoardVO"
+		parameterType="int">
+    <![CDATA[
+      SELECT * from report_board
+      where rb_number = #{rb_number}
+    ]]>
+	</select>
+
+
+
+	<delete id="deleteArticle" parameterType="int">
+    <![CDATA[
+      delete from REPORT_BOARD
+      where rb_number in (
+         SELECT rb_number FROM  REPORT_BOARD
+         START WITH rb_number = #{rb_number}
+         CONNECT BY PRIOR  rb_number = parent_no )
+    ]]>
+	</delete>
+
+	<select id="selectNewArticleNO" resultType="int">
+		<![CDATA[
+			SELECT  nvl(max(rb_number), 0) + 1 from REPORT_BOARD	
+		]]>
+	</select>
+
+	<update id="boardHit" parameterType="int">
+		UPDATE REPORT_BOARD SET
+		rb_countnum = rb_countnum+1
+		WHERE rb_number = #{rb_number}
+	</update>
+
+	
+
+	<insert id="insertNewImage" parameterType="java.util.Map">
+		<foreach item="item" collection="list" open="INSERT ALL"
+			separator=" " close="SELECT 
+		* FROM DUAL"> INTO
+			rb_image(image_no, imageFileName, rb_number)
+			VALUES (#{item.image_no}, #{item.imageFileName}, #{item.rb_number})
+		</foreach>
+	</insert>
+
+	<select id="selectNewImageFileNO" resultType="int"> <![CDATA[ SELECT 
+		nvl(max(image_no),0) from rb_image ]]>
+	</select>
+
+
+	<select id="selectImageFileList" resultMap="imgResult" parameterType="int"> 
+		<![CDATA[ SELECT * from rb_image where rb_number=#{rb_number} ]]> </select>
+	
+	<!-- <update id="updateArticle" parameterType="java.util.Map"> update t_board 
+		set title=#{title}, content=#{content} <if test="imageFileName!='' and imageFileName!=null"> 
+		, imageFileName=#{imageFileName} </if> where articleNO=#{articleNO} </update> -->
+</mapper>

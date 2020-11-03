@@ -4,11 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-<%-- 
-<c:set var="article"  value="${articleMap.article}"  />
-<c:set var="imageFileList"  value="${articleMap.imageFileList}"  />
 
- --%>
+
+<%-- <c:set var="imageFileList"  value="${articleMap.imageFileList}"  /> --%>
+
+ 
 <%
   request.setCharacterEncoding("UTF-8");
 %> 
@@ -28,7 +28,7 @@
    <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
    <script type="text/javascript" >
      function backToList(obj){
-	    obj.action="${contextPath}/board/listArticles.do";
+	    obj.action="${contextPath}/board/rb_board/report_boardlist.do";
 	    obj.submit();
      }
  
@@ -46,14 +46,14 @@
 		 obj.submit();
 	 }
 	 
-	 function fn_remove_article(url,articleNO){
+	 function fn_remove_article(url,rb_number){
 		 var form = document.createElement("form");
 		 form.setAttribute("method", "post");
 		 form.setAttribute("action", url);
 	     var articleNOInput = document.createElement("input");
 	     articleNOInput.setAttribute("type","hidden");
-	     articleNOInput.setAttribute("name","articleNO");
-	     articleNOInput.setAttribute("value", articleNO);
+	     articleNOInput.setAttribute("name","rb_number");
+	     articleNOInput.setAttribute("value", rb_number);
 		 
 	     form.appendChild(articleNOInput);
 	     document.body.appendChild(form);
@@ -87,18 +87,15 @@
  </script>
 </head>
 <body>
-  <form name="frmArticle" method="post"  action="${contextPath}"  enctype="multipart/form-data">
+  <form name="frmArticle" method="post"  action="${contextPath}/board/rb_board/report_boardView.do">
   <table  border=0  align="center">
   <tr>
    <td width=150 align="center" bgcolor=#FF9933>
       글번호
    </td>
    <td >
-   <%--  <input type="text" name="articleNO" value="${article.articleNO }"  readonly />  --%><!-- //보여주는데 못써 -->
-    <input type="text"  value="${article.articleNO }"  disabled /> <!-- //보여주는데 못써 -->
-    <input type="hidden"  value="${article.articleNO}"  /> <!-- // 안보여주고 넘길때 처리 -->
-   
-   
+    <input type="text"  value="${articleMap.rb_number}"  disabled />
+    <input type="hidden" name="article.rb_number" value="${articleMap.rb_number}"  />
    </td>
   </tr>
   <tr>
@@ -106,7 +103,7 @@
       작성자 아이디
    </td>
    <td >
-    <input type=text value="${article.id }" name="writer"  disabled />
+    <input type=text value="${articleMap.member_id }" name="writer"  disabled />
    </td>
   </tr>
   <tr>
@@ -114,7 +111,7 @@
       제목 
    </td>
    <td>
-    <input type=text value="${article.title }"  name="title"  id="i_title" disabled />
+    <input type=text value="${articleMap.rb_title}"  name="title"  id="i_title" disabled />
    </td>   
   </tr>
   <tr>
@@ -122,10 +119,10 @@
       내용
    </td>
    <td>
-    <textarea rows="20" cols="60"  name="content"  id="i_content"  disabled />${article.content }</textarea>
+    <textarea rows="20" cols="60"  name="content"  id="i_content"  disabled />${articleMap.rb_content}</textarea>
    </td>  
   </tr>
- <%-- 
+ 
  <c:if test="${not empty imageFileList && imageFileList!='null' }">
 	  <c:forEach var="item" items="${imageFileList}" varStatus="status" >
 		    <tr>
@@ -143,9 +140,7 @@
 			    </td>
 			 </tr>
 		</c:forEach>
- </c:if>
- 	 --%>    
- 	 
+ </c:if>     
   <c:choose> 
 	  <c:when test="${not empty article.imageFileName && article.imageFileName!='null' }">
 	   	<tr>
@@ -154,8 +149,7 @@
 		   </td>
 		   <td>
 		     <input  type= "hidden"   name="originalFileName" value="${article.imageFileName }" />
-		    <img src="${contextPath}/download.do?articleNO=${article.articleNO}&imageFileName=${article.imageFileName}" id="preview"  /><br>
-		    <%-- <img src="${contextPath}/upload/${article.articleNO}&imageFileName=${article.imageFileName}" id="preview"  /><br> --%>
+		    <img src="${contextPath}/download.do?articleNO=${article.rb_number}&imageFileName=${article.imageFileName}" id="preview"  /><br>
 		   </td>   
 		  </tr>  
 		  <tr>
@@ -180,7 +174,7 @@
 				       <img id="preview"  /><br>
 				       <input  type="file"  name="imageFileName " id="i_imageFileName"   disabled   onchange="readURL(this);"   />
 				    </td>
-			  </tr>
+			  </tr>-
 		 </c:otherwise>
 	 </c:choose>
   <tr>
@@ -188,7 +182,7 @@
 	      등록일자
 	   </td>
 	   <td>
-	    <input type=text value="<fmt:formatDate value="${article.writeDate}" />" disabled />
+	    <input type=text value="<fmt:formatDate value="${articleMap.write_date}" />" disabled />
 	   </td>   
   </tr>
   <tr   id="tr_btn_modify"  align="center"  >
@@ -200,12 +194,13 @@
     
   <tr  id="tr_btn"    >
    <td colspan="2" align="center">
-       <c:if test="${member.id == article.id }">
+       <c:if test="${member.member_id == articleMap.member_id}"> 
 	      <input type=button value="수정하기" onClick="fn_enable(this.form)">
-	      <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.articleNO})">
+	      <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/rb_board/removereport_board.do' , ${articleMap.rb_number})">
 	    </c:if>
 	    <input type=button value="리스트로 돌아가기"  onClick="backToList(this.form)">
-	     <input type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${article.articleNO})">
+	    <!-- 나중에 한번 더 수정필요 -->
+	     <input type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/rb_board/report_boardReplyForm.do', ${articleMap.rb_number})">
    </td>
   </tr>
  </table>
