@@ -26,52 +26,20 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.oyster.report_board.vo.ImageVO;
 import com.oyster.member.vo.MemberVO;
 import com.oyster.report_board.service.Report_BoardSerivce;
-import com.oyster.report_board.vo.ImageVO;
 import com.oyster.report_board.vo.Report_boardVO;
 
 @Controller("Report_BoardController")
 @RequestMapping(value = "/board")
-public class Report_BoardController {
+public class Report_BoardController  {
 	private static final String ARTICLE_IMAGE_REPO = "C:\\board\\article_image";
 	@Autowired
 	private Report_BoardSerivce report_boardserivce;
 
 	@Autowired
 	private Report_boardVO report_boardvo;
-
-	// 글쓰기 창 넘어가기
-	@RequestMapping(value = "/rb_board/report_boardForm.do", method = { RequestMethod.GET, RequestMethod.POST })
-	private ModelAndView newArticleform(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		return mav;
-	}
-
-	// 수정 창 넘어가기
-	@RequestMapping(value = "/rb_board/rb_articlemodForm.do", method = { RequestMethod.GET, RequestMethod.POST })
-	private ModelAndView modArticleform(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		int rb_number = Integer.parseInt(request.getParameter("rb_number"));
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		return mav;
-	}
-
-	// 답글 창 넘어가기
-	@RequestMapping(value = "/rb_board/report_boardNewReArticleForm.do", method = { RequestMethod.GET,
-			RequestMethod.POST })
-	private ModelAndView reArticleform(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		int parent_no = Integer.parseInt(request.getParameter("parent_no"));
-		HttpSession session = request.getSession();
-		session.setAttribute("parent_no", parent_no);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		return mav;
-	}
 
 	// 게시판 목록 보여주기
 	@RequestMapping(value = "/rb_board/report_boardlist.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -116,80 +84,13 @@ public class Report_BoardController {
 	@RequestMapping(value = "/rb_board/report_boardView.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView viewArticle(@RequestParam("rb_number") int rb_number, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+
 		String viewName = (String) request.getAttribute("viewName");
 		Map articleMap = (Map) report_boardserivce.viewArticle(rb_number);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		mav.addObject("articleMap", articleMap);
 		return mav;
-	}
-
-	// 답글 쓰기
-	@RequestMapping(value = "/rb_board/report_boardNewReArticle.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ResponseEntity addnewReply(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Map<String, Object> articleMap = new HashMap<String, Object>();
-		Enumeration enu = request.getParameterNames();
-		while (enu.hasMoreElements()) {
-			String name = (String) enu.nextElement();
-			String value = request.getParameter(name);
-			articleMap.put(name, value);
-		}
-
-		String message;
-		ResponseEntity resEnt = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		try {
-			report_boardserivce.modArticle(articleMap);
-			message = "<script>";
-			message += " alert('답글을 추가했습니다.');";
-			message += " location.href='" + request.getContextPath() + "/board/rb_board/report_boardlist.do'; ";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-		} catch (Exception e) {
-			message = " <script>";
-			message += " alert('오류가 발생했습니다. 다시 시도해 주세요');');";
-			message += " location.href='" + request.getContextPath()
-					+ "/board/rb_board/report_boardNewReArticleForm.do'; ";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-			e.printStackTrace();
-		}
-		return resEnt;
-	}
-
-	// 글 수정하기
-	@RequestMapping(value = "/board/rb_board/modariticle.do", method = { RequestMethod.GET,
-			RequestMethod.POST })
-	public ResponseEntity modArticle(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Map<String, Object> replyMap = new HashMap<String, Object>();
-		Enumeration enu = request.getParameterNames();
-		while (enu.hasMoreElements()) {
-			String name = (String) enu.nextElement();
-			String value = request.getParameter(name);
-			replyMap.put(name, value);
-		}
-		System.out.println("replyMap>>>>>>>>>>>"+replyMap);
-		String message;
-		ResponseEntity resEnt = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		try {
-			report_boardserivce.insertNewreply(replyMap);
-			message = "<script>";
-			message += " alert('글이 수정되었습니다.');";
-			message += " location.href='" + request.getContextPath() + "/board/rb_board/report_boardlist.do'; ";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-		} catch (Exception e) {
-			message = " <script>";
-			message += " alert('오류가 발생했습니다. 다시 시도해 주세요');');";
-			message += " location.href='" + request.getContextPath() + "/board/articleForm.do'; ";
-			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-			e.printStackTrace();
-		}
-		return resEnt;
 	}
 
 	// 다중 이미지 글쓰기
@@ -210,12 +111,12 @@ public class Report_BoardController {
 
 		// 로그인 시 세션에 저장된 회원 정보에서 글쓴이 아이디를 얻어와서 Map에 저장합니다.
 		HttpSession session = multipartRequest.getSession();
-//		MemberVO memberVO1 = new MemberVO();
-//		memberVO1.setMember_id("aa");
-//		memberVO1.setMember_pw("aa");
-//		session.setAttribute("memberInfo", memberVO1);
+		MemberVO memberVO1 = new MemberVO();
+		memberVO1.setMember_id("aa");
+		memberVO1.setMember_pw("aa");
+		session.setAttribute("memberInfo", memberVO1);
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
-		if (memberVO != null && memberVO.getMember_id() != null) {
+		if(memberVO != null && memberVO.getMember_id() != null) {
 			String id = memberVO.getMember_id();
 			articleMap.put("member_id", id);
 		}
@@ -227,6 +128,7 @@ public class Report_BoardController {
 				ImageVO imageVO = new ImageVO();
 				imageVO.setImageFileName(fileName);
 				imageFileList.add(imageVO);
+				System.out.println("컨트롤러 fileList>>>>>>>>>"+fileName);
 			}
 			articleMap.put("imageFileList", imageFileList);
 		}
@@ -243,14 +145,13 @@ public class Report_BoardController {
 					File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + rb_number);
 					// destDir.mkdirs();
 					FileUtils.moveFileToDirectory(srcFile, destDir, true);
-					System.out.println("컨트롤러 imageVO>>>>>>>>>>" + imageVO);
+					System.out.println("컨트롤러 imageVO>>>>>>>>>>"+imageVO);
 				}
 			}
 
 			message = "<script>";
 			message += " alert('새글을 추가했습니다.');";
-			message += " location.href='" + multipartRequest.getContextPath()
-					+ "/board/rb_board/report_boardlist.do'; ";
+			message += " location.href='" + multipartRequest.getContextPath() + "/board/rb_board/report_boardlist.do'; ";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 
@@ -265,8 +166,7 @@ public class Report_BoardController {
 
 			message = " <script>";
 			message += " alert('오류가 발생했습니다. 다시 시도해 주세요');";
-			message += " location.href='" + multipartRequest.getContextPath()
-					+ "/board/rb_board/report_boardForm.do'; ";
+			message += " location.href='" + multipartRequest.getContextPath() + "/board/rb_board/report_boardForm.do'; ";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
@@ -283,6 +183,7 @@ public class Report_BoardController {
 			MultipartFile mFile = multipartRequest.getFile(fileName);
 			String originalFileName = mFile.getOriginalFilename();
 			fileList.add(originalFileName);
+			System.out.println("업로드 fileList>>>>>>>>>"+fileList);
 			File file = new File(ARTICLE_IMAGE_REPO + "\\" + fileName);
 			if (mFile.getSize() != 0) { // File Null Check
 				if (!file.exists()) { // 경로상에 파일이 존재하지 않을 경우
@@ -298,4 +199,12 @@ public class Report_BoardController {
 		return fileList;
 	}
 
+	// 글쓰기 창 넘어가기
+	@RequestMapping(value = "/rb_board/*Form.do", method = { RequestMethod.GET, RequestMethod.POST })
+	private ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
 }

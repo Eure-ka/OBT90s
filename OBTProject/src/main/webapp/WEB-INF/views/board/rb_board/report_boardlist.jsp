@@ -26,8 +26,7 @@
 	<c:choose>
 		<c:when test="${not empty memberInfo}">
 			<button type="button"
-				onclick="location.href='${contextPath}/board/rb_board/report_boardForm.do'"
-				style="position: absolute; top: 330px; right: 160px;">글쓰기</button>
+				onclick="location.href='${contextPath}/board/rb_board/report_boardForm.do'" style="position: absolute; top:330px;right:160px;">글쓰기</button>
 		</c:when>
 	</c:choose>
 	<section id="container">
@@ -46,7 +45,7 @@
 				<c:when test="${articlesList !=null }">
 					<thead>
 						<tr>
-							<th>번호</th>
+							<th>신고글번호</th>
 							<th>작성자</th>
 							<th>제목</th>
 							<th>작성일</th>
@@ -55,9 +54,9 @@
 						</tr>
 					</thead>
 
-					<c:forEach items="${articlesList}" var="article" varStatus="articleNum">
+					<c:forEach var="article" items="${articlesList}">
 						<tr>
-							<td>${articleNum.count}<br></td>
+							<td><c:out value="${article.rb_number}" /></td>
 							<td><c:out value="${article.member_id }" /></td>
 							<td align="left"><c:choose>
 									<c:when test='${article.rb_level > 1 }'>

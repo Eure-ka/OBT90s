@@ -17,8 +17,8 @@
 <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="sidebar-heading">게시판목록 </div>
       <div class="list-group list-group-flush">
-        <a href="${contextPath}/board/fb_board/fb_listArticles.do" class="list-group-item list-group-item-action bg-light">자유게시판</a>
-        <a href="${contextPath}/board/tb_board/tb_listArticles.do" class="list-group-item list-group-item-action bg-light">거래게시판</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">자유게시판</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">거래게시판</a>
         <a href="${contextPath}/board/rb_board/report_boardlist.do" class="list-group-item list-group-item-action bg-light">신고게시판</a>
       </div>
     </div>

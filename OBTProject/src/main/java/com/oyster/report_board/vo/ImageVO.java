@@ -1,5 +1,9 @@
 package com.oyster.report_board.vo;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.sql.Date;
+
 public class ImageVO {
 	private int image_no;
 	private int rb_number;

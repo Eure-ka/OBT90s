@@ -32,27 +32,18 @@
 	    obj.submit();
      }
  
-	 /* function fn_enable(obj){
+	 function fn_enable(obj){
 		 document.getElementById("i_title").disabled=false;
 		 document.getElementById("i_content").disabled=false;
 		 document.getElementById("i_imageFileName").disabled=false;
 		 document.getElementById("tr_btn_modify").style.display="block";
 		 document.getElementById("tr_file_upload").style.display="block";
 		 document.getElementById("tr_btn").style.display="none";
-	 } */
+	 }
 	 
-	 function fn_modify_article(url,rb_number){
-		 var form = document.createElement("form");
-		 form.setAttribute("method", "post");
-		 form.setAttribute("action", url);
-	     var articleNOInput = document.createElement("input");
-	     articleNOInput.setAttribute("type","hidden");
-	     articleNOInput.setAttribute("name","rb_number");
-	     articleNOInput.setAttribute("value", rb_number);
-		 
-	     form.appendChild(articleNOInput);
-	     document.body.appendChild(form);
-	     form.submit();
+	 function fn_modify_article(obj){
+		 obj.action="${contextPath}/board/rb_board/modArticle.do";
+		 obj.submit();
 	 }
 	 
 	 function fn_remove_article(url,rb_number){
@@ -70,14 +61,15 @@
 	 
 	 }
 	 
-	 function fn_reply_form(url, parent_no){
+	 function fn_reply_form(url, parentNO){
 		 var form = document.createElement("form");
 		 form.setAttribute("method", "post");
 		 form.setAttribute("action", url);
 	     var parentNOInput = document.createElement("input");
 	     parentNOInput.setAttribute("type","hidden");
-	     parentNOInput.setAttribute("name","parent_no");
-	     parentNOInput.setAttribute("value", parent_no); 
+	     parentNOInput.setAttribute("name","parentNO");
+	     parentNOInput.setAttribute("value", parentNO);
+		 
 	     form.appendChild(parentNOInput);
 	     document.body.appendChild(form);
 		 form.submit();
@@ -95,9 +87,9 @@
  </script>
 </head>
 <body>
-  <form name="frmArticle">
+  <form name="frmArticle" method="post"  action="${contextPath}/board/rb_board/report_boardView.do">
   <table  border=0  align="center">
-  <%-- <tr>
+  <tr>
    <td width=150 align="center" bgcolor=#FF9933>
       글번호
    </td>
@@ -105,7 +97,7 @@
     <input type="text"  value="${articleMap.article.rb_number}"  disabled />
     <input type="hidden" name="rb_number" value="${articleMap.article.rb_number}"  />
    </td>
-  </tr> --%>
+  </tr>
   <tr>
     <td width="150" align="center" bgcolor="#FF9933">
       작성자 아이디
@@ -166,11 +158,12 @@
   <tr  id="tr_btn"    >
    <td colspan="2" align="center">
        <c:if test="${memberInfo.member_id == articleMap.article.member_id}"> 
-	      <input type=button value="수정하기" onClick="fn_modify_article(${contextPath}/board/rb_board/rb_articlemodForm.do,${articleMap.article.rb_number})">
+	      <input type=button value="수정하기" onClick="fn_enable(this.form)">
 	      <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/rb_board/removereport_board.do' , ${articleMap.article.rb_number})">
 	    </c:if>
 	    <input type=button value="리스트로 돌아가기"  onClick="backToList(this.form)">
-	     <input type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/rb_board/report_boardNewReArticleForm.do', ${articleMap.article.rb_number})">
+	    <!-- 나중에 한번 더 수정필요 -->
+	     <input type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/rb_board/report_boardReplyForm.do', ${articleMap.article.rb_number})">
    </td>
   </tr>
  </table>

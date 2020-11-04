@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
-
 import com.oyster.report_board.vo.Report_boardVO;
 
 public interface Report_BoardDAO {
@@ -15,6 +14,4 @@ public interface Report_BoardDAO {
 	public Report_boardVO selectArticle(int rb_number) throws DataAccessException;
 	public void boardHit(int rb_number) throws Exception;
 	public List selectImageFileList(int rb_number) throws DataAccessException;
-	public int insertNewreply(Map replyMap) throws DataAccessException;
-	public void updateArticle(Map articleMap) throws Exception;
 }

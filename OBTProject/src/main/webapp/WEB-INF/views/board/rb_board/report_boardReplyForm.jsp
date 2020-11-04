@@ -34,19 +34,23 @@
 
 <body>
  <h1>답글쓰기</h1>
-  <form name="frmReply" method="post"  action="${contextPath}/board/rb_board/report_boardNewReArticle.do">
+  <form name="frmReply" method="post"  action="${contextPath}/board/rb_board/report_boardReplyForm.do" enctype="multipart/form-data">
     <table>
-		<tr>
-			<td align="right">답글제목:&nbsp;</td>
-			<td><input type="text" size="67"  maxlength="500" name="rb_title" ></input></td>
+    <tr>
+			<td align="right"> 작성자:&nbsp; </td>
+			<td><input type="text" size="20" maxlength="100"  name="writer"></input> </td>
 		</tr>
 		<tr>
-			<td align="right">게시물 글작성자:&nbsp;</td>
-			<td><input type="text" size="20" maxlength="100"  name="member_id" value="${memberInfo.name}" readonly></input> </td>
+			<td align="right">제목:&nbsp;  </td>
+			<td><input type="text" size="67"  maxlength="500" name="title"> </input></td>
 		</tr>
 		<tr>
-			<td align="right" valign="top"><br>답글내용:&nbsp; </td>
-			<td><textarea name="rb_content" rows="10" cols="65" maxlength="4000"> </textarea> </td>
+			<td align="right" valign="top"><br>내용:&nbsp; </td>
+			<td><textarea name="content" rows="10" cols="65" maxlength="4000"> </textarea> </td>
+		</tr>
+		<tr>
+			<td align="right">비밀번호:&nbsp;  </td>
+			<td><input type="password" size="10" maxlength="12" name="passwd"> </input> </td>
 		</tr>
 		<!-- <tr>
 			<td align="right">이미지파일 첨부:  </td>
@@ -56,7 +60,7 @@
 		<tr>
 			<td align="right"> </td>
 			<td>
-				<input type=submit value="답글반영하기" />
+				<input type=submit value="답글쓰기" />
 				<input type=button value="취소"onClick="backToList(this.form)" />
 				
 			</td>

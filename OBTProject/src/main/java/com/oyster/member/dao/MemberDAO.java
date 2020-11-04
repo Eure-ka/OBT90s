@@ -1,5 +1,7 @@
 package com.oyster.member.dao;
 
+import java.util.Map;
+
 import org.springframework.dao.DataAccessException;
 
 import com.oyster.member.vo.MemberVO;

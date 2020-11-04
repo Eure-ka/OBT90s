@@ -44,7 +44,7 @@
 	 
 	 function fn_remove_article(url){
 		 var form = document.createElement("form");
-		 form.setAttribute("method", "post");
+		 form.setAttribute("method", "get");
 		 form.setAttribute("action", url);
 		 document.body.appendChild(form);
 	     form.submit();
@@ -54,7 +54,7 @@
 </head>
 <body>
   <form method="get"  >
-  <table  border="1">
+  <table  border="1" align="center">
   <tr>
    <td width=150 align="center" bgcolor=#FF9933>
       아이디
@@ -115,7 +115,7 @@
   <tr  id="tr_btn"    >
    <td colspan="2" align="center">
 	      <input type=button value="회원정보수정하기" onClick="fn_enable(this.form)">
-	       <input type=button value="회원탈퇴하기" onClick="fn_remove_article('${contextPath}/member/memberDeleteView.do')">
+	       <input type=button value="회원탈퇴하기" onClick="fn_remove_article('${contextPath}/member/memberDeleteView')">
 	    <input type=button value="리스트로 돌아가기"  onClick="backToList(this.form)">
    </td>
   </tr>

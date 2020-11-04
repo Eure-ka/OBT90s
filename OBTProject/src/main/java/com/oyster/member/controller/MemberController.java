@@ -1,5 +1,9 @@
 package com.oyster.member.controller;
 
+import java.io.PrintWriter;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,11 +17,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.oyster.member.service.MemberService;
 import com.oyster.member.vo.MemberVO;
+import com.oyster.report_board.vo.Report_boardVO;
+
+import sun.java2d.opengl.WGLSurfaceData.WGLVSyncOffScreenSurfaceData;
+
+import com.oyster.member.service.MemberService;
 
 @Controller("memberController")
 @RequestMapping(value = "/member")
@@ -87,9 +97,11 @@ public class MemberController {
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 
 		String password = _memberVO.getMember_pw();
+		System.out.println("암호화 전 비밀번호 : " + password);
 
 		String encPassword = bCryptPasswordEncoder.encode(password);
 
+		System.out.println("암호화 후 비밀번호 : " + encPassword);
 
 		_memberVO.setMember_pw(encPassword);
 
@@ -120,33 +132,36 @@ public class MemberController {
 		return resEntity;
 	}
 
-	
-	@RequestMapping(value = "/memberDeleteView", method = {RequestMethod.POST })
+	// 회원 탈퇴 get
+	@RequestMapping(value = "/memberDeleteView", method = { RequestMethod.GET, RequestMethod.POST })
 	public String memberDeleteView() throws Exception {
-		
-		return "/member/memberDeleteView";
+		return "member/memberDeleteView";
 	}
 
-	
+	// 회원 탈퇴 post
 	@RequestMapping(value = "/removeMember.do", method = RequestMethod.POST)
 	public ResponseEntity memberDelete(MemberVO memberVO, HttpServletRequest request, HttpServletResponse response,
 			HttpSession session, RedirectAttributes rttr) throws Exception {
+
 		// 세션에 있는 member를 가져와 member변수에 넣어줍니다.
 		memberVO = (MemberVO) session.getAttribute("memberInfo");
 		// 세션에있는 비밀번호
 		String sessionPass = memberVO.getMember_pw();
+		System.out.println("sessionPass>>>>>>" + sessionPass);
 		// vo로 들어오는 비밀번호
 		String voPass = memberVO.getMember_pw();
+		System.out.println("voPass>>>>>>>>>" + voPass);
 		String message;
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
 			if (sessionPass.equals(voPass)) {
+
 				memberService.removeMember(memberVO);
 				session.invalidate();
 				message = "<script>";
-				message += " alert('탈퇴에 성공했습니다. 다음에 또 뵈요!');";
+				message += " alert('회원을 탈퇴했습니다.');";
 				message += " location.href='" + request.getContextPath() + "/member/loginForm.do';";
 				message += " </script>";
 				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);

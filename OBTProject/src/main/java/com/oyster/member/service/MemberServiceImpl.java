@@ -1,12 +1,13 @@
 package com.oyster.member.service;
 
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.oyster.member.dao.MemberDAO;
 import com.oyster.member.vo.MemberVO;
+import com.oyster.member.dao.MemberDAO;
 
 @Service("memberService")
 @Transactional(propagation = Propagation.REQUIRED)
@@ -17,6 +18,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	   public MemberVO standard_login(MemberVO memberVO) throws Exception {
+	      System.out.println("들어왔느뇨" + memberDAO.standard_login(memberVO));
 	      return memberDAO.standard_login(memberVO);
 	   }
 
@@ -33,6 +35,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public void removeMember(MemberVO memberVO) throws Exception {
+		System.out.println("서비스 memberVO>>>>>>>"+memberVO);
 		memberDAO.removeMember(memberVO);
 	}
 	
