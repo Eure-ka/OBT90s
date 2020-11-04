@@ -88,11 +88,13 @@ public class ReplyController {
 		response.setContentType("text/html; charset=UTF-8");
 		System.out.println("Remove controller>>>>check>>>>>>>>>>" + request.getRequestURI());
 		System.out.println("Remove controller>>>>>>>>>>>>>>" + replyMap.get("boardKind"));
+		System.out.println("Remove controller>>>>>>>>>>>>>>" + replyMap.get("reply_no"));
+		int reply_no = Integer.parseInt((String)replyMap.get("reply_no"));
 		ResponseEntity resEnt;
 		//String message;
 
 		try {
-			replyService.deleteReply((Integer)replyMap.get("reply_no"));
+			replyService.deleteReply(reply_no);
 
 //			message = "<script>";
 //			message += " alert('댓글을 삭제했습니다.');";

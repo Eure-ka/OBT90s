@@ -19,7 +19,7 @@
 	display: none;
 }
 </style>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
      function backToList(obj){
     	 
@@ -192,8 +192,8 @@
 				value="${memberInfo.id}" hidden /></td>
 			<td colspan=2><textarea name="reply_content" rows="3" cols="65"
 					maxlength="500"></textarea></td>
-			<td><input type="submit" value="등록"
-				action="${contextPath}/reply/addNewArticle.do"></td>
+			<td><button class="insertRepl"
+				action="${contextPath}/reply/addNewArticle.do"></button></td>
 		</tr>
 	</table>
 
@@ -211,41 +211,41 @@
 			</tr>
 			<tr class="${repl.reply_no}">
 				<td colspan="2" align="right">
-					<a class="delRepl" href="${repl.reply_no}">삭제</a>
+					<!-- <a class="delRepl" href="javascript:void(0)">삭제</a> -->
+					<a class="delRepl" href="#none" id="${repl.reply_no}">삭제</a>
 				</td>
 			</tr>
 
 		</c:forEach>
 	</table>
-<script type="text/javascript">
-$(document).ready(function(){
-	  $(".delRepl").click(function(event){
-		  event.preventDefault();
-		  console.log("wow");
-		  var reply_no = $(this).attr("href");
-		  console.log("wow >> " + reply_no));
-		  
-		  /* $.ajax({
-			    url: "${contextPath}/reply/removeReply.do",
-			    type:"post",
-			    contentType:'application/json; charset=utf-8',
-		        data: JSON.stringify({"boardKind": "fb" , "reply_no": reply_no}),
-		        //dataType: 'json',
-		        console.log("wow");
-			    success: function(result){
-			    	console.log(result);
-			    	if (result=="OK") {
-			            $("."+reply_no).remove();
-			            alert("삭제되었습니다.");
-			        } else{
-			            alert("오류.");
-			        }
-			    }
-			        
-			}); */	
-	  });
-	});
+	<script type="text/javascript">
 	
+$(document).ready(function(){
+	  $(".delRepl").click(function(e){
+		  e.preventDefault();
+		  console.log("wow");
+		  console.log($(this).attr("id")); //32
+		  var reply_no = $(this).attr("id");
+	  	
+		  $.ajax({
+			  method: "POST",
+			  url: "${contextPath}/reply/removeReply.do",
+			  contentType: "application/json; charset=UTF-8",
+			  data: JSON.stringify({"boardKind": "fb", "reply_no": reply_no}),
+			  //dataType: "json",			  
+			  success: function (res) {
+				  console.log("done>>> ", res);
+				  if(res=='success'){
+					  $('.'+reply_no).remove();
+				  }
+			  },
+			  error: function (request, status, error) {
+				  console.log(status);
+				  console.log(error);
+			  }
+	  		});
+	});
+});	
 </script>
 </body>
 </html>
