@@ -81,6 +81,7 @@ public class Report_BoardDAOImpl implements Report_BoardDAO{
 		int rb_number = selectNewArticleNO();
 		//매개변수로 받은 맵에 글번호 추가
 		replyMap.put("rb_number", rb_number);
+		System.out.println("replyMap>>>>>>>>>>>>"+replyMap);
 		sqlSession.selectOne("mapper.report_Board.insetNewReArticle",replyMap);
 		return rb_number;
 	}

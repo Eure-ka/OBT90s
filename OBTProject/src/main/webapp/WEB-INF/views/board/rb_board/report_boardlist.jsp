@@ -26,7 +26,7 @@
 	<c:choose>
 		<c:when test="${not empty memberInfo}">
 			<button type="button"
-				onclick="location.href='${contextPath}/board/rb_board/report_boardForm.do'"
+				onclick="location.href='${contextPath}/board/rb_board/rb_articleForm.do'"
 				style="position: absolute; top: 330px; right: 160px;">글쓰기</button>
 		</c:when>
 	</c:choose>
@@ -64,7 +64,7 @@
 										<c:forEach begin="1" end="5" step="1">
 											<span style="padding-left: 8px"></span>
 										</c:forEach>
-										<span style="font-size: 12px;">[답변]</span>
+										<span style="font-size: 12px;">Re:</span>
 										<a
 											href="${contextPath}/board/rb_board/report_boardView.do?rb_number=${article.rb_number}"><c:out
 												value="${article.rb_title}" /></a>

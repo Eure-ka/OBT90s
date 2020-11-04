@@ -9,7 +9,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>신고 게시판 글쓰기창</title>
+<title>신고 게시판 수정하기</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script type="text/javascript">
@@ -66,12 +66,13 @@
 					       }
 	}
 </script>
-<title>글쓰기창</title>
+<title>수정하기</title>
 </head>
 <body>
-	<h1 style="text-align: center">수정하기</h1>
+	<h1 style="text-align: center">글쓰기</h1>
 	<form name="articleForm" method="post"
-		action="${contextPath}/board/rb_board/modreport_board.do">
+		action="${contextPath}/board/rb_board/addNewreport_board.do"
+		enctype="multipart/form-data">
 		<table border="1" align="center">
 			<tr>
 				<td align="right">작성자</td>
@@ -79,12 +80,12 @@
 					maxlength="100" value="${memberInfo.name}" readonly></td>
 			</tr>
 			<tr>
-				<td align="right">수정할글제목:</td>
+				<td align="right">글제목:</td>
 				<td colspan="2"><input type="text" size="67" maxlength="500"
 					name="rb_title" /></td>
 			</tr>
 			<tr>
-				<td align="right" valign="top"><br>수정할 글내용:</td>
+				<td align="right" valign="top"><br>글내용:</td>
 				<td colspan=2><textarea name="rb_content" rows="10" cols="65"
 						maxlength="4000"></textarea></td>
 			</tr>
@@ -105,8 +106,8 @@
 			</tr>
 			<tr>
 				<td align="right"></td>
-				<td colspan="2"><input type="submit" value="수정반영하기" /> <input
-					type=button value="이전단계로 돌아가기" onClick="backToList(this.form)" /></td>
+				<td colspan="2"><input type="submit" value="글쓰기" /> <input
+					type=button value="목록보기" onClick="backToList(this.form)" /></td>
 			</tr>
 		</table>
 	</form>

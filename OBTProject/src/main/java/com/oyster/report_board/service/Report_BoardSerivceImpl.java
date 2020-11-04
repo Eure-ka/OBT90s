@@ -55,7 +55,7 @@ public class Report_BoardSerivceImpl implements Report_BoardSerivce {
 	public int insertNewreply(Map replyMap) throws Exception {
 		int rb_number = report_Boarddao.insertNewreply(replyMap);
 		replyMap.put("rb_number", rb_number);
-		System.out.println("서비스 replyMap>>>>>" + replyMap);
+		System.out.println("서비스 replyMap>>>>>>>>>>>"+replyMap);
 		return rb_number;
 	}
 

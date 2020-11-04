@@ -42,7 +42,7 @@ public class Report_BoardController {
 	private Report_boardVO report_boardvo;
 
 	// 글쓰기 창 넘어가기
-	@RequestMapping(value = "/rb_board/report_boardForm.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/rb_board/rb_articleForm.do", method = { RequestMethod.GET, RequestMethod.POST })
 	private ModelAndView newArticleform(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView();
@@ -56,6 +56,7 @@ public class Report_BoardController {
 		String viewName = (String) request.getAttribute("viewName");
 		int rb_number = Integer.parseInt(request.getParameter("rb_number"));
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("rb_number", rb_number);
 		mav.setViewName(viewName);
 		return mav;
 	}
@@ -65,10 +66,9 @@ public class Report_BoardController {
 			RequestMethod.POST })
 	private ModelAndView reArticleform(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
-		int parent_no = Integer.parseInt(request.getParameter("parent_no"));
-		HttpSession session = request.getSession();
-		session.setAttribute("parent_no", parent_no);
+		int parent_no = Integer.parseInt(request.getParameter("parent_no")); 
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("parent_no", parent_no);
 		mav.setViewName(viewName);
 		return mav;
 	}
@@ -135,12 +135,13 @@ public class Report_BoardController {
 			articleMap.put(name, value);
 		}
 
+		System.out.println("articleMap>>>>>>"+articleMap);
 		String message;
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
-			report_boardserivce.modArticle(articleMap);
+			report_boardserivce.insertNewreply(articleMap);
 			message = "<script>";
 			message += " alert('답글을 추가했습니다.');";
 			message += " location.href='" + request.getContextPath() + "/board/rb_board/report_boardlist.do'; ";
@@ -159,23 +160,21 @@ public class Report_BoardController {
 	}
 
 	// 글 수정하기
-	@RequestMapping(value = "/board/rb_board/modariticle.do", method = { RequestMethod.GET,
-			RequestMethod.POST })
+	@RequestMapping(value = "/rb_board/modarticle.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity modArticle(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Map<String, Object> replyMap = new HashMap<String, Object>();
+		Map<String, Object> articleMap = new HashMap<String, Object>();
 		Enumeration enu = request.getParameterNames();
 		while (enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
 			String value = request.getParameter(name);
-			replyMap.put(name, value);
+			articleMap.put(name, value);
 		}
-		System.out.println("replyMap>>>>>>>>>>>"+replyMap);
 		String message;
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
-			report_boardserivce.insertNewreply(replyMap);
+			report_boardserivce.modArticle(articleMap);
 			message = "<script>";
 			message += " alert('글이 수정되었습니다.');";
 			message += " location.href='" + request.getContextPath() + "/board/rb_board/report_boardlist.do'; ";
@@ -184,7 +183,7 @@ public class Report_BoardController {
 		} catch (Exception e) {
 			message = " <script>";
 			message += " alert('오류가 발생했습니다. 다시 시도해 주세요');');";
-			message += " location.href='" + request.getContextPath() + "/board/articleForm.do'; ";
+			message += " location.href='" + request.getContextPath() + "/board/rb_board/rb_articleForm.do'; ";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();

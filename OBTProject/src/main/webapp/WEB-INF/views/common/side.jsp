@@ -20,11 +20,9 @@
         <a href="${contextPath}/board/fb_board/fb_listArticles.do" class="list-group-item list-group-item-action bg-light">자유게시판</a>
         <a href="${contextPath}/board/tb_board/tb_listArticles.do" class="list-group-item list-group-item-action bg-light">거래게시판</a>
         <a href="${contextPath}/board/rb_board/report_boardlist.do" class="list-group-item list-group-item-action bg-light">신고게시판</a>
+        <a href="#"><img src="https://i.pinimg.com/564x/ea/bb/65/eabb65ca2724f8c1878b696864d3658f.jpg" style="width:100%"></img></a>
       </div>
     </div>
-	<%-- <h3>게시판 메뉴</h3>
-	<a href="#" style="text-align: center"></a><hr>
-	<a href="#" style="text-align: center"></a><hr>
-	<a href="" style="text-align: center">신고게시판</a><hr> --%>
+    
 </body>
 </html>

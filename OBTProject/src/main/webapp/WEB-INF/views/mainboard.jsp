@@ -13,6 +13,6 @@
 <title>메인게시판</title>
 </head>
 <body>
-	<h1>메인게시판</h1>
+<h1>메인페이지얌</h1>
 </body>
 </html>

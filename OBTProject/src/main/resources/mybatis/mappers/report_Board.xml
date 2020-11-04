@@ -24,7 +24,11 @@
 
 	<select id="selectAllArticlesList" resultMap="articlesResult">
 		<![CDATA[
-		SELECT *from report_board order by rb_number
+		SELECT level, rb_number, parent_no, rb_title,write_date,member_id,rb_level
+      from REPORT_BOARD
+      START WITH   parent_no=0
+      CONNECT BY PRIOR rb_number= parent_no 
+      ORDER SIBLINGS BY rb_number DESC
 		]]>
 	</select>
 
@@ -47,7 +51,7 @@
 		parameterType="int">
     <![CDATA[
       SELECT * from report_board
-      where  rb_number = #{rb_number}
+      where  rb_number = #{rb_number} 
     ]]>
 	</select>
 

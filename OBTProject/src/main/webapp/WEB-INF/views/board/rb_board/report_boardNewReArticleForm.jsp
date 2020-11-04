@@ -48,6 +48,8 @@
 			<td align="right" valign="top"><br>답글내용:&nbsp; </td>
 			<td><textarea name="rb_content" rows="10" cols="65" maxlength="4000"> </textarea> </td>
 		</tr>
+		<input type="text" name="parent_no" value="${parent_no}" hidden/>
+		<input type="text" name="rb_number" value="${rb_number}" hidden/>
 		<!-- <tr>
 			<td align="right">이미지파일 첨부:  </td>
 			<td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td>
