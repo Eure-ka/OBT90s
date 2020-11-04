@@ -1,7 +1,5 @@
 package com.oyster.member.service;
 
-import java.util.Map;
-
 import com.oyster.member.vo.MemberVO;
 
 public interface MemberService {
