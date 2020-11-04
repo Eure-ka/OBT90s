@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.oyster.member.vo.MemberVO;
 import com.oyster.member.service.MemberService;
@@ -41,19 +42,19 @@ public class MemberControllerImpl implements MemberController {
 	
 	@Override
 	@RequestMapping(value = "/standard_login.do", method = RequestMethod.POST)
-	public ModelAndView login(Map<String, String> loginMap, HttpServletRequest request, HttpServletResponse response)
+	public ModelAndView login(@RequestParam Map<String, String> loginMap,RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		memberVO = memberService.standard_login(loginMap);
-		if (/* memberVO != null && */memberVO.getMember_id() != null) {
+		if (memberVO != null && memberVO.getMember_id() != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("memberInfo", memberVO);
-			session.setAttribute("isLogin", true);
+			//session.setAttribute("isLogin", true);
 
 			String action = (String) session.getAttribute("action");
-			if (action != null /* && action.equals("/") */) {
+			if (action != null && action.equals("/main.do") ) {
 				mav.setViewName("forward:" + action);
 			} else {
-				mav.setViewName("redirect:/main");
+				mav.setViewName("redirect:/main.do");
 			}
 		} else {
 			String message = "아이디 혹은 비밀번호 오류. 다시 로그인해주세요.";

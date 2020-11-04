@@ -5,7 +5,7 @@
 
 <mapper namespace="mapper.member">
 	<!-- 리절트 맵 정의 -->
-	<resultMap id="memberResult" type="MemberVO">
+	<resultMap id="memberResult" type="memberVO">
 		<result property="member_id" column="member_id" />
 		<result property="member_pw" column="member_pw" />
 		<result property="name" column="name" />
@@ -39,7 +39,7 @@
 		resultType="String">
 		select decode(count(*),1, 'true', 0, 'false')
 		from member
-		where member_id = #{id}
+		where member_id = #{member_id}
 	</select>
 
 	<insert id="insertNewMember" parameterType="memberVO">

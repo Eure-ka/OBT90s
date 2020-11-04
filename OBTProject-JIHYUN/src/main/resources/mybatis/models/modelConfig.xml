@@ -6,9 +6,12 @@
   <typeAliases>
     <!-- <typeAlias type="com.oyster.member.vo.MemberVO" alias="memberVO" /> -->
     <typeAlias type="com.oyster.free_board.vo.FreeBoardVO" alias="freeBoardVO" />
-    <!-- <typeAlias type="com.oyster.trans_board.vo.FreeBoardVO" alias="transBoardVO" />
-    <typeAlias type="com.oyster.report_board.vo.FreeBoardVO" alias="reportBoardVO" />
-    <typeAlias type="com.oyster.commom.vo.ImageFileVO" alias="imageFileVO" /> -->
+    <typeAlias type="com.oyster.trans_board.vo.TransBoardVO" alias="transBoardVO" />
+       <typeAlias type="com.oyster.report_board.vo.Report_boardVO" alias="reportBoardVO" />
+         <typeAlias type="com.oyster.member.vo.MemberVO" alias="memberVO" />
+         <typeAlias type="com.oyster.reply.vo.ReplyVO" alias="replyVO" />
+    <typeAlias type="com.oyster.report_board.vo.ImageVO" alias="imageVO" />
+<!--    <typeAlias type="com.oyster.commom.vo.ImageFileVO" alias="imageFileVO" /> -->
     
   </typeAliases>
 </configuration>
