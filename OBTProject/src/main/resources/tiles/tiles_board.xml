@@ -15,7 +15,7 @@
       <put-attribute name="body" value="/WEB-INF/views/mainboard.jsp" />
    </definition>
 <!-- 자유게시판 -->
-	<!-- <definition name="/board/fb_board/fb_listArticles" extends="baseLayout">
+	<definition name="/board/fb_board/fb_listArticles" extends="baseLayout">
 		<put-attribute name="title" value="자유게시판 글목록" />
 		<put-attribute name="body" value="/WEB-INF/views/board/fb_board/fb_listArticles.jsp" />
 	</definition>
@@ -30,7 +30,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/board/fb_board/fb_articleForm.jsp" />
 	</definition>
 
-거래게시판	
+<!-- 거래게시판 -->	
 	<definition name="/board/tb_board/tb_articleForm" extends="baseLayout">
 		<put-attribute name="title" value="거래게시판 글쓰기" />
 		<put-attribute name="body" value="/WEB-INF/views/board/tb_board/tb_articleForm.jsp" />
@@ -44,7 +44,7 @@
 	<definition name="/board/tb_board/tb_viewArticle" extends="baseLayout">
 		<put-attribute name="title" value="거래게시판 글보기" />
 		<put-attribute name="body" value="/WEB-INF/views/board/tb_board/tb_viewArticle.jsp" />
-	</definition> -->
+	</definition>
 
 <!-- 신고게시판 -->	
 	<definition name="/board/rb_board/report_boardlist" extends="baseLayout">

@@ -35,7 +35,12 @@
 		]]>
 	</insert>
 
-
+	<insert id="insetNewReArticle" parameterType="java.util.Map">
+		<![CDATA[
+			INSERT into REPORT_BOARD(rb_level,rb_number, parent_no,rb_title, rb_content,member_id,write_date)
+			VALUES(2,#{rb_number},#{parent_no},#{rb_title},#{rb_content},#{member_id},sysdate)
+		]]>
+	</insert>
 
 
 	<select id="selectArticle" resultType="reportBoardVO"
@@ -87,7 +92,10 @@
 		<![CDATA[ SELECT * from rb_image where rb_number=#{rb_number} ]]>
 	</select>
 
-	<!-- <update id="updateArticle" parameterType="java.util.Map"> update t_board 
-		set title=#{title}, content=#{content} <if test="imageFileName!='' and imageFileName!=null"> 
-		, imageFileName=#{imageFileName} </if> where articleNO=#{articleNO} </update> -->
+	<update id="updateArticle" parameterType="java.util.Map">
+		update REPORT_BOARD
+		set rb_title=#{rb_title}, rb_content=#{rb_content}
+		where rb_number=#{rb_number}
+	</update>
+	
 </mapper>
