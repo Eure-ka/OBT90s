@@ -15,7 +15,7 @@
 		<result property="member_id" column="member_id" />
 	</resultMap>
 
-	<resultMap id="imgResult" type="imageVO">
+	<resultMap id="imgResult" type="reportimageVO">
 		<result property="image_no" column="image_no" />
 		<result property="rb_number" column="rb_number" />
 		<result property="imageFileName" column="imageFileName" />

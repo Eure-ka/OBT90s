@@ -24,7 +24,7 @@
 <meta charset="UTF-8">
 <title>자유게시판</title>
 </head>
-<script>
+<!-- <script>
 	function fn_articleForm(isLogOn, articleForm, loginForm) {
 		if (isLogOn != '' && isLogOn != 'false') {
 			location.href = articleForm;
@@ -33,51 +33,56 @@
 			location.href = loginForm + '?action=/board/fb_board/fb_articleForm.do';
 		}
 	}
-</script>
+</script> -->
 <body>
-	<h1>자유게시판</h1>
-	<table align="center" border="1" width="80%">
-		<tr height="10" align="center" bgcolor="lightgreen">
-			<td>글번호</td>
-			<td>작성자</td>
-			<td>제목</td>
-			<td>작성일</td>
-			<td>조회수</td>
-			<td>좋아요</td>
-		</tr>
-		<c:choose>
-			<c:when test="${articlesList ==null }">
-				<tr height="10">
-					<td colspan="4">
-						<p align="center">
-							<b><span style="font-size: 9pt;">등록된 글이 없습니다.</span></b>
-						</p>
-					</td>
-				</tr>
-			</c:when>
-			
-			<c:when test="${articlesList !=null }">
-				<c:forEach var="article" items="${articlesList}"
-					varStatus="articleNum">
-					<tr align="center">
-						<td width="5%">${articleNum.count}</td>
-						<td width="10%">${article.member_id }</td>
-						<td align='left' width="35%"><a class='cls1'
-							href="${contextPath}/board/fb_board/fb_viewArticle.do?fb_number=${article.fb_number}">${article.fb_title}</a>
-
+	<c:choose>
+		<c:when test="${not empty memberInfo}">
+			<button type="button"
+				onclick="location.href='${contextPath}/board/fb_board/fb_articleForm.do'"
+				style="position: absolute; top: 330px; right: 160px;">글쓰기</button>
+		</c:when>
+	</c:choose>
+	
+	<section id="container">
+		<table class="table table-hover">
+			<c:choose>
+				<c:when test="${articlesList ==null }">
+					<tr height="10">
+						<td colspan="4">
+							<p align="center">
+								<b><span style="font-size: 9pt;">등록된 글이 없습니다.</span></b>
+							</p>
 						</td>
-						<td width="10%"><fmt:formatDate value="${article.fb_write_date }"
-									pattern="yyyy.MM.dd HH:mm" /></td>
-						<td width="10%">${article.fb_countnum}</td>
-						<td width="10%">${article.fb_likenum}</td>
 					</tr>
-				</c:forEach>
-			</c:when>
-		</c:choose>
-	</table>
-	<!-- <a  class="cls1"  href="#"><p class="cls2">글쓰기</p></a> -->
-	<%-- <a class="cls1"	href="javascript:fn_articleForm('${isLogOn}','${contextPath}/board/articleForm.do', '${contextPath}/member/loginForm.do')"> --%>
-	<a class="cls1"	href="${contextPath}/board/fb_board/fb_articleForm.do">
-	<p class="cls2">글쓰기</p></a>
+				</c:when>
+				<c:when test="${articlesList !=null }">
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>작성자</th>
+							<th>제목</th>
+							<th>작성일</th>
+							<th>조회수</th>
+							<th>좋아요</th>
+						</tr>
+					</thead>
+
+					<c:forEach items="${articlesList}" var="article"
+						varStatus="articleNum">
+						<tr>
+							<td>${articleNum.count}<br></td>
+							<td><c:out value="${article.member_id }" /></td>
+							<td align="left"><a
+								href="${contextPath}/board/fb_board/fb_View.do?fb_number=${article.fb_number}"><c:out
+										value="${article.fb_title}" /></a></td>
+							<td><fmt:formatDate value="${article.fb_write_date}"
+									pattern="yyyy-MM-dd" /></td>
+							<td><c:out value="${article.fb_countnum}" /></td>
+							<td><c:out value="${article.fb_likenum}" /></td>
+						</tr>
+					</c:forEach>
+				</c:when>
+			</c:choose>
+		</table>
 </body>
 </html>

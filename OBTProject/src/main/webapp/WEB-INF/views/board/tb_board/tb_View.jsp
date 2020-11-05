@@ -23,7 +23,7 @@
    <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
    <script type="text/javascript" >
      function backToList(obj){
-	    obj.action="${contextPath}/board/rb_board/rb_listarticles.do";
+	    obj.action="${contextPath}/board/tb_board/tb_listArticles.do";
 	    obj.submit();
      }
  
@@ -36,28 +36,28 @@
 		 document.getElementById("tr_btn").style.display="none";
 	 }
 	 
-	 function fn_modify_article(url,rb_number){
+	 function fn_modify_article(url,tb_number){
 		 var form = document.createElement("form");
 		 form.setAttribute("method", "post");
 		 form.setAttribute("action", url);
 	     var articleNOInput = document.createElement("input");
 	     articleNOInput.setAttribute("type","hidden");
-	     articleNOInput.setAttribute("name","rb_number");
-	     articleNOInput.setAttribute("value", rb_number);
+	     articleNOInput.setAttribute("name","tb_number");
+	     articleNOInput.setAttribute("value", tb_number);
 		 
 	     form.appendChild(articleNOInput);
 	     document.body.appendChild(form);
 	     form.submit();
 	 }
 	 
-	 function fn_remove_article(url,rb_number){
+	 function fn_remove_article(url,tb_number){
 		 var form = document.createElement("form");
 		 form.setAttribute("method", "post");
 		 form.setAttribute("action", url);
 	     var articleNOInput = document.createElement("input");
 	     articleNOInput.setAttribute("type","hidden");
-	     articleNOInput.setAttribute("name","rb_number");
-	     articleNOInput.setAttribute("value", rb_number);
+	     articleNOInput.setAttribute("name","tb_number");
+	     articleNOInput.setAttribute("value", tb_number);
 		 
 	     form.appendChild(articleNOInput);
 	     document.body.appendChild(form);
@@ -65,18 +65,6 @@
 	 
 	 }
 	 
-	 function fn_reply_form(url, parent_no){
-		 var form = document.createElement("form");
-		 form.setAttribute("method", "post");
-		 form.setAttribute("action", url);
-	     var parentNOInput = document.createElement("input");
-	     parentNOInput.setAttribute("type","hidden");
-	     parentNOInput.setAttribute("name","parent_no");
-	     parentNOInput.setAttribute("value", parent_no); 
-	     form.appendChild(parentNOInput);
-	     document.body.appendChild(form);
-		 form.submit();
-	 }
 	 
 	/*  function readURL(input) {
 	     if (input.files && input.files[0]) {
@@ -90,7 +78,7 @@
  </script>
 </head>
 <body>
-   <form name="frmArticle" method="post" action="${contextPath}/board/rb_board/rb_View.do">
+   <form name="frmArticle" method="post" action="${contextPath}/board/tb_board/tb_View.do">
 
       <div class="row">
          <div class="col-md-3">
@@ -103,13 +91,13 @@
             value="${articleMap.article.member_id}">
       </div>
       <div class="form-group" style="margin-right: 70px">
-         <label for="title">글제목 <input type=text name="rb_title"
-            value="${articleMap.article.rb_title}" disabled />
+         <label for="title">글제목 <input type=text name="tb_title"
+            value="${articleMap.article.tb_title}" disabled />
       </div>
 
       <div class="form-group" style="margin-left: 70px">
          <label for="content">글내용</label>
-         <input type=text class="form-control" style="width:950px; height:500px" value="${articleMap.article.rb_content}" name="rb_content"
+         <input type=text class="form-control" style="width:950px; height:500px" value="${articleMap.article.tb_content}" name="tb_content"
             style="resize: none;" id="content" required="required" readonly></textarea>
       </div>
 
@@ -123,7 +111,7 @@
                      이미지${status.count }</td>
                   <td><input type="hidden" name="originalFileName"
                      value="${item.imageFileName }" /> <img
-                     src="${contextPath}/download.do?rb_number=${articleMap.article.rb_number}&imageFileName=${item.imageFileName}"
+                     src="${contextPath}/download.do?tb_number=${articleMap.article.tb_number}&imageFileName=${item.imageFileName}"
                      id="preview" style="width: 75%" /><br></td>
                </tr>
                 <tr>
@@ -144,11 +132,10 @@
   <tr  id="tr_btn"    >
    <td colspan="2" align="center">
        <c:if test="${memberInfo.member_id == articleMap.article.member_id}"> 
-	      <input type=button value="수정하기" onClick="fn_modify_article('${contextPath}/board/rb_board/rb_articlemodForm.do',${articleMap.article.rb_number})">
-	      <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/rb_board/removereport_board.do' , ${articleMap.article.rb_number})">
+	      <input type=button value="수정하기" onClick="fn_modify_article('${contextPath}/board/tb_board/tb_articlemodForm.do',${articleMap.article.tb_number})">
+	      <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/tb_board/removetrans.do' , ${articleMap.article.tb_number})">
 	    </c:if>
 	    <input type=button value="리스트로 돌아가기"  onClick="backToList(this.form)">
-	    <input type=button value="답글쓰기"  onClick="fn_reply_form('${contextPath}/board/rb_board/rb_rearticleForm.do', ${articleMap.article.rb_number})">
    </td>
   </tr>
  </table>

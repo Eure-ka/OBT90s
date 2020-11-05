@@ -1,14 +1,18 @@
 package com.oyster.trans_board.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.oyster.free_board.vo.FreeBoardVO;
+
+import com.oyster.reply.dao.ReplyDAOImpl;
 import com.oyster.trans_board.dao.TransBoardDAOImpl;
+import com.oyster.trans_board.vo.ImageVO;
 import com.oyster.trans_board.vo.TransBoardVO;
 
 @Service("transBoardService")
@@ -17,35 +21,44 @@ public class TransBoardServiceImpl implements TransBoardService {
 
 	@Autowired
 	TransBoardDAOImpl transBoardDAO;
-	
-	@Override
+	@Autowired
+	ReplyDAOImpl replyDAO;
+
 	public List<TransBoardVO> listArticles() throws Exception {
-		System.out.println("Service<<<<<<<<<<< pass");
-		return transBoardDAO.selectAllArticlesList();
+		List<TransBoardVO> articlesList = transBoardDAO.selectAllArticlesList();
+		return articlesList;
 	}
 
 	@Override
 	public int addNewArticle(Map articleMap) throws Exception {
-		System.out.println("글쓰기 service>>>>>>>>>>>>>>>" + articleMap);
-		return transBoardDAO.insertNewArticle(articleMap);
-	}
+		int tb_number = transBoardDAO.insertNewArticle(articleMap);
+		articleMap.put("tb_number", tb_number);
+		transBoardDAO.insertNewImage(articleMap);
 
-	@Override
-	public TransBoardVO viewArticle(int tb_number) throws Exception {
-		System.out.println("Service<<<<<view<<<<<< 들어왔  >>>>> " + tb_number);
-		TransBoardVO transBoardVO =transBoardDAO.selectArticle(tb_number);
-		return transBoardVO;
-	}
-
-	@Override
-	public void modArticle(Map articleMap) throws Exception {
-		System.out.println("Service<<<<mod<<<<< 들어왔  >>>>> " + articleMap);
-		transBoardDAO.updateArticle(articleMap);
+		return tb_number;
 	}
 
 	@Override
 	public void removeArticle(int tb_number) throws Exception {
-		System.out.println("Service<<<<removes<<<<< 들어왔  >>>>> " + tb_number);
 		transBoardDAO.deleteArticle(tb_number);
 	}
+
+	@Transactional(isolation = Isolation.READ_COMMITTED)
+	@Override
+	public Map viewArticle(int tb_number) throws Exception {
+		Map articleMap = new HashMap();
+		TransBoardVO freeboardvo = transBoardDAO.selectArticle(tb_number);
+		List<ImageVO> imageFileList = transBoardDAO.selectImageFileList(tb_number);
+		articleMap.put("article", freeboardvo);
+		articleMap.put("imageFileList", imageFileList);
+		transBoardDAO.boardHit(tb_number);
+		return articleMap;
+	}
+
+
+	@Override
+	public void modArticle(Map articleMap) throws Exception {
+		transBoardDAO.updateArticle(articleMap);
+	}
+	
 }

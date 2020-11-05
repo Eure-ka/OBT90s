@@ -5,7 +5,7 @@
 
 <mapper namespace="mapper.transboard">
 	<!-- 리절트 맵 정의 -->
-	<resultMap id="transResult" type="transBoardVO">
+	<resultMap id="articlesResult" type="transBoardVO">
 	
 		<result property="tb_number" column="tb_number" />
 		<result property="tb_title" column="tb_title" />
@@ -16,8 +16,15 @@
 		<result property="tb_countnum" column="tb_countnum" />
 		<result property="write_date" column="write_date" />
 	</resultMap>
-
-<select id="selectAllArticlesList" resultMap="transResult">
+	
+	<resultMap id="imgResult" type="transimageVO">
+		<result property="image_no" column="image_no" />
+		<result property="tb_number" column="tb_number" />
+		<result property="imageFileName" column="imageFileName" />
+	</resultMap>
+	
+	
+<select id="selectAllArticlesList" resultMap="articlesResult">
 	<![CDATA[
 		select * from trans_board
 	]]>
@@ -39,44 +46,45 @@
 	
 	<insert id="insertNewArticle"  parameterType="java.util.Map">
 		<![CDATA[
-			INSERT into trans_board(tb_number,  tb_title, tb_content,  member_id,write_date)
-			VALUES(#{tb_number},#{tb_title},#{tb_content}, #{member_id},sysdate)
+			INSERT into trans_board(tb_number,  tb_title, tb_content,  member_id,write_date,tb_countnum,tb_likenum)
+			VALUES(#{tb_number},#{tb_title},#{tb_content}, #{member_id},sysdate,0,0)
 		]]>      
 	</insert>
 	
-	 <update id="updateArticle"  parameterType="java.util.Map">
-			update trans_board
-			set tb_title=#{tb_title},	 
-			tb_content=#{tb_content}
-			 <!-- <if test="imageFileName!='' and imageFileName!=null">
-			  , imageFileName=#{imageFileName}
-			</if> -->
-			where tb_number=#{tb_number}
-	</update>
+	 <insert id="insertNewImage" parameterType="java.util.Map">
+		<foreach item="item" collection="list" open="INSERT ALL"
+			separator=" " close="SELECT 
+		* FROM DUAL"> INTO
+			image(image_no, imageFileName, tb_number)
+			VALUES (#{item.image_no}, #{item.imageFileName}, #{item.tb_number})
+		</foreach>
+	</insert>
 	
 	<delete id="deleteArticle"  parameterType="int">
     <![CDATA[
-      delete from trans_board
-      where tb_number in (
-         SELECT tb_number FROM  trans_board
-         START WITH tb_number = #{tb_number}
-        <!--  CONNECT BY PRIOR  tb_number = parentNO ) -->
+     delete from trans_board where tb_number=#{tb_number}
     ]]>      
   </delete>
-	
-  <!-- <select id="selectNewImageFileNO" resultType="int"  >
-    <![CDATA[
-      SELECT  nvl(max(imageFileNO),0) from imageFile		
-    ]]>
-  </select>
-	
-
-  <select  id="selectImageFileList" resultMap="imgResult" parameterType="int">
-    <![CDATA[
-      SELECT * from imageFile
-      where tb_number=#{tb_number}	
-    ]]>
-  </select>  -->
   
+  <update id="boardHit" parameterType="int">
+		UPDATE free_board SET
+		fb_countnum = fb_countnum+1
+		WHERE fb_number = #{fb_number}
+	</update>
+	
+	<select id="selectNewImageFileNO" resultType="int"> <![CDATA[ SELECT 
+		nvl(max(image_no),0) from image ]]>
+	</select>
+  
+	<select id="selectImageFileList" resultMap="imgResult"
+		parameterType="int"> 
+		<![CDATA[ SELECT * from image where tb_number=#{tb_number} ]]>
+	</select>
+
+  	<update id="updateArticle"  parameterType="java.util.Map">
+			update trans_board
+		set tb_title=#{tb_title}, tb_content=#{tb_content}
+		where tb_number=#{tb_number}
+	</update>
   
 </mapper>
