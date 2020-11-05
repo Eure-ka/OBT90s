@@ -10,10 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import net.coobird.thumbnailator.Thumbnails;
+
 
 @Controller
-public class FileDownloadController {
-	private static final String ARTICLE_IMAGE_REPO = "C:\\board\\article_image";
+public class rb_FileDownloadController {
+	private static final String ARTICLE_IMAGE_REPO = "C:\\\\upload";
 	@RequestMapping("/download.do")
 	protected void download(@RequestParam("imageFileName") String imageFileName,
 							@RequestParam("rb_number") String rb_number,
@@ -21,7 +23,14 @@ public class FileDownloadController {
 		OutputStream out = response.getOutputStream();
 		String downFile = ARTICLE_IMAGE_REPO + "\\" +rb_number+"\\"+ imageFileName;
 		File file = new File(downFile);
-
+		/* 썸네일 부분 */
+		int lastIndex = imageFileName.lastIndexOf(".");
+		String fileName = imageFileName.substring(0,lastIndex);
+		File thumbnail = new File(ARTICLE_IMAGE_REPO+"\\"+"thumbnail"+"\\"+rb_number+"\\"+fileName+".png");
+		if ( file.exists()) { 
+			thumbnail.getParentFile().mkdirs();
+		    Thumbnails.of( file).size(50,50).outputFormat("png").toFile(thumbnail);
+		}
 		response.setHeader("Cache-Control", "no-cache");
 		response.addHeader("Content-disposition", "attachment; fileName=" + imageFileName);
 		FileInputStream in = new FileInputStream(file);

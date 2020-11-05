@@ -31,7 +31,6 @@
 		</c:when>
 	</c:choose>
 	<section id="container">
-
 		<table class="table table-hover">
 			<c:choose>
 				<c:when test="${articlesList ==null }">
@@ -66,12 +65,12 @@
 										</c:forEach>
 										<span style="font-size: 12px;">Re:</span>
 										<a
-											href="${contextPath}/board/rb_board/report_boardView.do?rb_number=${article.rb_number}"><c:out
+											href="${contextPath}/board/rb_board/rb_View.do?rb_number=${article.rb_number}"><c:out
 												value="${article.rb_title}" /></a>
 									</c:when>
 									<c:otherwise>
 										<a
-											href="${contextPath}/board/rb_board/report_boardView.do?rb_number=${article.rb_number}"><c:out
+											href="${contextPath}/board/rb_board/rb_View.do?rb_number=${article.rb_number}"><c:out
 												value="${article.rb_title}" /></a>
 									</c:otherwise>
 								</c:choose></td>
@@ -84,6 +83,17 @@
 				</c:when>
 			</c:choose>
 		</table>
+		
+		<%-- <a href="${contextPath}/board/rb_board/rb_View.do?rb_number=${articlesList.rb_number}"><img  src="${contextPath}/download.do?rb_number=${articleMap.article.rb_number}&imageFileName=${item.imageFileName}"
+                     id="preview" style="width: 200px;height:200px" alt="게시판이미지" /></a> --%>
+		
+		
+		
+		
+		
+		
+		
+		
 		<%-- <div class="search row">
 			<div class="col-xs-2 col-sm-2">
 				<select name="searchType" class="form-control">

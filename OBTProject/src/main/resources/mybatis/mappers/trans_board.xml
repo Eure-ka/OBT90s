@@ -39,8 +39,8 @@
 	
 	<insert id="insertNewArticle"  parameterType="java.util.Map">
 		<![CDATA[
-			INSERT into trans_board(tb_number,  tb_title, tb_content,  member_id)
-			VALUES(#{tb_number},#{tb_title},#{tb_content}, #{member_id})
+			INSERT into trans_board(tb_number,  tb_title, tb_content,  member_id,write_date)
+			VALUES(#{tb_number},#{tb_title},#{tb_content}, #{member_id},sysdate)
 		]]>      
 	</insert>
 	

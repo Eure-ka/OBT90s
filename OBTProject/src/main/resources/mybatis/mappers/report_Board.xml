@@ -24,7 +24,7 @@
 
 	<select id="selectAllArticlesList" resultMap="articlesResult">
 		<![CDATA[
-		SELECT level, rb_number, parent_no, rb_title,write_date,member_id,rb_level
+		SELECT *
       from REPORT_BOARD
       START WITH   parent_no=0
       CONNECT BY PRIOR rb_number= parent_no 
@@ -81,19 +81,19 @@
 		<foreach item="item" collection="list" open="INSERT ALL"
 			separator=" " close="SELECT 
 		* FROM DUAL"> INTO
-			rb_image(image_no, imageFileName, rb_number)
+			image(image_no, imageFileName, rb_number)
 			VALUES (#{item.image_no}, #{item.imageFileName}, #{item.rb_number})
 		</foreach>
 	</insert>
 
 	<select id="selectNewImageFileNO" resultType="int"> <![CDATA[ SELECT 
-		nvl(max(image_no),0) from rb_image ]]>
+		nvl(max(image_no),0) from image ]]>
 	</select>
 
 
 	<select id="selectImageFileList" resultMap="imgResult"
 		parameterType="int"> 
-		<![CDATA[ SELECT * from rb_image where rb_number=#{rb_number} ]]>
+		<![CDATA[ SELECT * from image where rb_number=#{rb_number} ]]>
 	</select>
 
 	<update id="updateArticle" parameterType="java.util.Map">

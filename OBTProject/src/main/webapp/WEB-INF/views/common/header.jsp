@@ -79,7 +79,7 @@ header .overlay {
 				<div class="col-lg-8 col-md-10 mx-auto">
 						<c:choose>
 							<c:when test="${memberInfo != null }">
-								<p style="position:absolute;top:150px; right:20px; color: white">${memberInfo.name}님반갑습니다</p>
+								<p style="position:absolute;top:10px; right:20px; color: white">${memberInfo.name}님반갑습니다</p>
 							</c:when>
 						</c:choose>
 				</div>

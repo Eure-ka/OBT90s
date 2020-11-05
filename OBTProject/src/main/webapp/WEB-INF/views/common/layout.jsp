@@ -33,6 +33,13 @@
 <script src="${contextPath }/resources/vendor/jquery/jquery.min.js"></script>
 	<script src="${contextPath }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="${contextPath }/resources/js/clean-blog.min.js"></script>
+<!-- 메인페이지 부트스트랩 -->
+<script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="${contextPath}/resources/css/styles.css" rel="stylesheet" />
 <style>
       #container {
         width: 100%;
