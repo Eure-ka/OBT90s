@@ -13,7 +13,5 @@ public interface Report_BoardSerivce {
 	public Map viewArticle(int rb_number) throws Exception;
 	public int insertNewreply(Map replyMap)throws Exception;
 	public void modArticle(Map articleMap) throws Exception;
-
-	
-
+	public void recommend(int rb_number) throws Exception;
 }

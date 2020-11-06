@@ -1,5 +1,9 @@
 package com.oyster.member.controller;
 
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -59,8 +64,8 @@ public class MemberController {
 				mav.setViewName("redirect:/main.do");
 			}
 		} else {
-			String message = "아이디 혹은 비밀번호 오류. 다시 로그인해주세요.";
-			mav.addObject("message", message);
+			String wronglogin="아라아라아라";
+			mav.addObject("wronglogin", wronglogin);
 			mav.setViewName("/member/loginForm");
 		}
 
@@ -161,4 +166,45 @@ public class MemberController {
 		}
 		return resEnt;
 	}
+	
+	//회원정보 수정
+  @RequestMapping(value="/modmemberInfo.do" ,method = RequestMethod.POST)
+  @ResponseBody
+  public ResponseEntity modmemberInfo(HttpServletRequest request,  
+    HttpServletResponse response) throws Exception{
+   request.setCharacterEncoding("utf-8");
+	Map memberInfoMap = new HashMap();
+	Enumeration enu=request.getParameterNames();
+	while(enu.hasMoreElements()){
+		String name=(String)enu.nextElement();
+		String value=request.getParameter(name);
+		memberInfoMap.put(name,value);
+	}
+	System.out.println("memberInfoMap>>>>>>>>"+memberInfoMap);
+//	HttpSession session = request.getSession();
+//	MemberVO memberVO = (MemberVO) session.getAttribute("member");
+	String id = memberVO.getMember_id();
+	memberInfoMap.put("id", id);
+	
+	/* String articleNO=(String)articleMap.get("articleNO"); */
+	String message;
+	ResponseEntity resEnt=null;
+	HttpHeaders responseHeaders = new HttpHeaders();
+	responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+    try {
+    	memberService.modmember(memberInfoMap);
+       message = "<script>";
+	   message += " alert('회원정보를 수정했습니다.');";
+	   message += " location.href='"+request.getContextPath()+"/main.do';";
+	   message +=" </script>";
+       resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+    }catch(Exception e) {
+      message = "<script>";
+	  message += " alert('오류가 발생했습니다');";
+	  message += " location.href='"+request.getContextPath()+"/member/memberInfo.do';";
+	  message +=" </script>";
+      resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+    }
+    return resEnt;
+  }
 }

@@ -12,24 +12,27 @@
 <meta charset="UTF-8">
 <title>신고게시판</title>
 </head>
-<!-- <script>
-	function fn_articleForm(isLogOn,articleForm,loginForm){
-	  if(isLogOn != '' && isLogOn != 'false'){
-	    location.href=articleForm;
+<script>
+	function fn_articleForm(isLogin){
+	  if(isLogin== true){
+	    location.href='${contextPath}/board/rb_board/rb_articleForm.do';
 	  }else{
 	    alert("로그인 후 글쓰기가 가능합니다.")
-	    location.href=loginForm+'?action=/board/articleForm.do';
+	    location.href='${contextPath}/member/loginForm.do';
 	  }
 	}
-</script> -->
+</script> 
 <body>
-	<c:choose>
-		<c:when test="${not empty memberInfo}">
-			<button type="button"
-				onclick="location.href='${contextPath}/board/rb_board/rb_articleForm.do'"
-				style="position: absolute; top: 330px; right: 160px;">글쓰기</button>
-		</c:when>
-	</c:choose>
+	<h4
+		class="page-section-heading text-center text-uppercase text-secondary mb-0">신고게시판</h4>
+	<!-- Icon Divider-->
+	<div class="divider-custom">
+		<div class="divider-custom-line"></div>
+		<div class="divider-custom-icon">
+			<i class="fas fa-star"></i>
+		</div>
+		<div class="divider-custom-line"></div>
+	</div>
 	<section id="container">
 		<table class="table table-hover">
 			<c:choose>
@@ -50,11 +53,12 @@
 							<th>제목</th>
 							<th>작성일</th>
 							<th>조회수</th>
-							<th>좋아요</th>
+							<th>추천수</th>
 						</tr>
 					</thead>
 
-					<c:forEach items="${articlesList}" var="article" varStatus="articleNum">
+					<c:forEach items="${articlesList}" var="article"
+						varStatus="articleNum">
 						<tr>
 							<td>${articleNum.count}<br></td>
 							<td><c:out value="${article.member_id }" /></td>
@@ -83,17 +87,18 @@
 				</c:when>
 			</c:choose>
 		</table>
-		
+		<button class=" type="button"
+			onclick="fn_articleForm(${isLogin})">글쓰기</button>
 		<%-- <a href="${contextPath}/board/rb_board/rb_View.do?rb_number=${articlesList.rb_number}"><img  src="${contextPath}/download.do?rb_number=${articleMap.article.rb_number}&imageFileName=${item.imageFileName}"
                      id="preview" style="width: 200px;height:200px" alt="게시판이미지" /></a> --%>
-		
-		
-		
-		
-		
-		
-		
-		
+
+
+
+
+
+
+
+
 		<%-- <div class="search row">
 			<div class="col-xs-2 col-sm-2">
 				<select name="searchType" class="form-control">

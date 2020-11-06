@@ -17,4 +17,5 @@ public interface Report_BoardDAO {
 	public List selectImageFileList(int rb_number) throws DataAccessException;
 	public int insertNewreply(Map replyMap) throws DataAccessException;
 	public void updateArticle(Map articleMap) throws Exception;
+	public void recommend(int rb_number) throws Exception;
 }

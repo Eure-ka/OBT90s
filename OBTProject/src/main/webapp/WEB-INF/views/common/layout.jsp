@@ -48,9 +48,12 @@
         border: 0px solid #bcbcbc;
       }
       #header {
-        padding: 5px;
+        width:100%;
+        height:10%;
+        /* padding: 5px;
         margin-bottom: 5px;
-        border: 0px solid #bcbcbc;
+        border: 0px solid #bcbcbc; */
+        
       }
       #sidebar-left {
         width: 20%;
@@ -69,8 +72,7 @@
         padding: 5px;
         border: 0px solid #bcbcbc;
       }
-      
-    </style>
+</style>
     
     
     <title><tiles:insertAttribute name="title" /></title>

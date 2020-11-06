@@ -98,8 +98,16 @@
 
 	<update id="updateArticle" parameterType="java.util.Map">
 		update REPORT_BOARD
-		set rb_title=#{rb_title}, rb_content=#{rb_content}
-		where rb_number=#{rb_number}
+		set
+		rb_title=#{rb_title}, rb_content=#{rb_content}
+		where
+		rb_number=#{rb_number}
+	</update>
+
+	<update id="recommend" parameterType="int">
+		update REPORT_BOARD
+		set rb_likenum = rb_likenum+1
+		where rb_number = #{rb_number}
 	</update>
 	
 </mapper>

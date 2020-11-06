@@ -123,7 +123,7 @@
 				
 				<tr class="dot_line">
 					<td class="fixed_join">이메일<br>(e-mail)</td>
-					<td><input size="10px"   type="text" name="email_head" /> @ <input  size="10px"  type="text"name="email2" /> 
+					<td><input size="10px"   type="text" name="email_head" /> @ <input  size="10px"  type="text"name="email2"  /> 
 						  <select name="email_tail" onChange=""	title="직접입력">
 									<option value="non">직접입력</option>
 									<option value="hanmail.net">hanmail.net</option>

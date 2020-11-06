@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -55,7 +56,7 @@ public class Report_BoardSerivceImpl implements Report_BoardSerivce {
 	public int insertNewreply(Map replyMap) throws Exception {
 		int rb_number = report_Boarddao.insertNewreply(replyMap);
 		replyMap.put("rb_number", rb_number);
-		System.out.println("서비스 replyMap>>>>>>>>>>>"+replyMap);
+		System.out.println("서비스 replyMap>>>>>>>>>>>" + replyMap);
 		return rb_number;
 	}
 
@@ -64,4 +65,9 @@ public class Report_BoardSerivceImpl implements Report_BoardSerivce {
 		report_Boarddao.updateArticle(articleMap);
 	}
 
+	@Override
+	public void recommend(int rb_number) throws Exception {
+		System.out.println("설마 서비스도 찍히냐?? rb_number>>>>>"+rb_number);
+		report_Boarddao.recommend(rb_number);
+		}
 }

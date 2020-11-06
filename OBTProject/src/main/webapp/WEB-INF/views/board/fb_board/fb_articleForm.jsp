@@ -77,13 +77,17 @@
       });
    })
 
+   var cnt=0;
    function addFile() {
-      var str = "<div class='file-group'><input type='file' name='file'><a href='#this' name='file-delete'>삭제</a></div>";
-      $("#file-list").append(str);
+      cnt++;
+      $("#file-list").append("<tr><td><input type='file' name='file"+cnt+"' onchange='readURL(this);'/><a href='#this' name='file-delete' onclick='delImg(this)'>삭제</a></td><td><img class='preview' scr='#' width=200 height=200/></td></tr>");
+      //var str = "<div class='file-group'><a href='#this' name='file-delete'>삭제</a></div>";
+      //$("#file-list").append(str);
       $("a[name='file-delete']").on("click", function(e) {
          e.preventDefault();
          deleteFile($(this));
       });
+      
    }
 
    function deleteFile(obj) {

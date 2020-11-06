@@ -1,5 +1,7 @@
 package com.oyster.member.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -35,4 +37,8 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.insert("mapper.member.memberDelete",memberVO);
 	}
 	
+	@Override
+	public void updatemember(Map memberInfoMap) throws DataAccessException {
+		sqlSession.insert("mapper.member.memberUpdate",memberInfoMap);
+	}
 }

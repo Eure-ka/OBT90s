@@ -69,5 +69,12 @@
    <delete id="memberDelete">
 	DELETE FROM member
 	WHERE member_id = #{member_id}
-</delete>
+   </delete>
+   
+   <update id="memberUpdate" parameterType="java.util.Map">
+	update member
+		set name=#{name}, email_head=#{email_head},email_tail=#{email_tail}
+		where member_id=#{member_id}
+   </update>
+   
 </mapper>

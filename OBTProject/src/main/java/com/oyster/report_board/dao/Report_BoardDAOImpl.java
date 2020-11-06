@@ -90,4 +90,10 @@ public class Report_BoardDAOImpl implements Report_BoardDAO{
 	public void updateArticle(Map articleMap) throws DataAccessException{
 		sqlSession.selectOne("mapper.report_Board.updateArticle",articleMap);
 	}
+	
+	@Override
+    public void recommend(int rb_number) throws Exception {
+		System.out.println("다오도???"+rb_number);
+        sqlSession.update("mapper.report_Board.recommend", rb_number);
+    }
 }
