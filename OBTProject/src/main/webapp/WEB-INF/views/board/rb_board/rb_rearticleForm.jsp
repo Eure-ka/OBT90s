@@ -42,19 +42,16 @@
 		</tr>
 		<tr>
 			<td align="right">게시물 글작성자:&nbsp;</td>
-			<td><input type="text" size="20" maxlength="100"  name="member_id" value="${memberInfo.name}" readonly></input> </td>
+			<td><input type="text" size="20" maxlength="100"  name="member_id" value="${memberInfo.member_id}" readonly></input> </td>
 		</tr>
 		<tr>
 			<td align="right" valign="top"><br>답글내용:&nbsp; </td>
 			<td><textarea name="rb_content" rows="10" cols="65" maxlength="4000"> </textarea> </td>
 		</tr>
-		<input type="text" name="parent_no" value="${parent_no}" hidden/>
-		<input type="text" name="rb_number" value="${rb_number}" hidden/>
-		<!-- <tr>
-			<td align="right">이미지파일 첨부:  </td>
-			<td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td>
-            <td><img  id="preview" src="#"   width=200 height=200/></td>
-		</tr> -->
+		<tr>
+		<td><input type="hidden" name="parent_no" value="${parent_no}" /></td>
+		<td><input type="hidden" name="rb_number" value="${rb_number}" /></td>
+		</tr>
 		<tr>
 			<td align="right"> </td>
 			<td>

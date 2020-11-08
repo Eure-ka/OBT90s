@@ -88,7 +88,9 @@
 				<td colspan=2><textarea name="rb_content" rows="10" cols="65"
 						maxlength="4000"></textarea></td>
 			</tr>
-			<input type="text" name="rb_number" value="${rb_number}" hidden/>
+			<tr>
+			<td><input type="hidden" name="rb_number" value="${rb_number}"/></td>
+			</tr>
 			<!-- <tr>
 				<td align="right">이미지파일 첨부: <a href="#this" onclick="addFile()">파일추가</a>
 					<div class="file-group">

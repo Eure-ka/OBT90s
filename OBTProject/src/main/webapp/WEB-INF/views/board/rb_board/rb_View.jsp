@@ -24,7 +24,6 @@
      
 function fn_recommend_article(url,rb_number,isLogin ){
 	if(isLogin== true){
-	alert("해당 글을 추천했습니다");
 	var form = document.createElement("form");
 	form.setAttribute("method", "post");
 	console.log("url>>>>>>>>>>"+url)
@@ -51,7 +50,7 @@ function fn_recommend_article(url,rb_number,isLogin ){
     
     
      function backToList(obj){
-	    obj.action="${contextPath}/board/rb_board/rb_listarticles.do";
+	    obj.action='${contextPath}/board/rb_board/rb_listarticles.do';
 	    obj.submit();
      }
  
@@ -123,6 +122,7 @@ function fn_recommend_article(url,rb_number,isLogin ){
  </script>
 </head>
 <body>
+	<form method="post">
 		<div class="row">
 			<div class="col-md-3">
 				<div class="form-group">
@@ -134,9 +134,6 @@ function fn_recommend_article(url,rb_number,isLogin ){
 			<input type="hidden" id="id" name="member_id"
 				value="${articleMap.article.member_id}">
 		</div>
-		<buttton type="button"> <img
-			src="${contextPath}/resources/img/like-heart-outline-symbol_icon-icons.com_73226.ico"
-			alt="좋아요 표시" style="width: 50px; text-align: right" /></buttton>
 		<div class="form-group" style="margin-right: 70px">
 			<label for="title">글제목 <input type=text name="rb_title"
 				value="${articleMap.article.rb_title}" disabled />
@@ -170,27 +167,18 @@ function fn_recommend_article(url,rb_number,isLogin ){
 					</tr>
 				</c:forEach>
 			</c:if>
-
-			<tr id="tr_btn_modify" align="center">
-				<td colspan="2"><input type=button value="수정반영하기"
-					onClick="fn_modify_article(frmArticle)"> <input type=button
-					value="취소" onClick="backToList(frmArticle)"></td>
-			</tr>
-
 			<tr id="tr_btn">
 				<td colspan="2" align="center"><c:if
 						test="${memberInfo.member_id == articleMap.article.member_id}">
-						<input type=button value="수정하기"
+						<input type=button value="수정하기" class="btn btn-info btn-sm"
 							onClick="fn_modify_article('${contextPath}/board/rb_board/rb_articlemodForm.do',${articleMap.article.rb_number})">
-						<input type=button value="삭제하기"
+						<input type=button value="삭제하기" class="btn btn-danger btn-sm"
 							onClick="fn_remove_article('${contextPath}/board/rb_board/removereport_board.do' , ${articleMap.article.rb_number})">
 					</c:if> 
-					<input type=button value="추천하기"
+					<input type=button value="추천하기" class="btn btn-warning btn-sm"
 							onClick="fn_recommend_article('${contextPath}/board/rb_board/recommend.do' , ${articleMap.article.rb_number},${isLogin})">
-					<input type=button value="리스트로 돌아가기"
-					onClick="backToList(this.form)"> <input type=button
-					value="답글쓰기"
-					onClick="fn_reply_form('${contextPath}/board/rb_board/rb_rearticleForm.do', ${articleMap.article.rb_number},${isLogin })">
+					<input type=button value="답글쓰기" class="btn btn-danger btn-sm" onClick="fn_reply_form('${contextPath}/board/rb_board/rb_rearticleForm.do', ${articleMap.article.rb_number},${isLogin })">
+					<input type=button value="리스트로 돌아가기" class="btn btn-primary btn-sm" onClick="backToList(this.form)"> 
 				</td>
 			</tr>
 		</table>

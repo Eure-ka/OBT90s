@@ -24,25 +24,28 @@
 <meta charset="UTF-8">
 <title>자유게시판</title>
 </head>
-<!-- <script>
-	function fn_articleForm(isLogOn, articleForm, loginForm) {
-		if (isLogOn != '' && isLogOn != 'false') {
-			location.href = articleForm;
-		} else {
-			alert("로그인 후 글쓰기가 가능합니다.")
-			location.href = loginForm + '?action=/board/fb_board/fb_articleForm.do';
-		}
+<script>
+	function fn_articleForm(isLogin){
+	  if(isLogin== true){
+	    location.href='${contextPath}/board/fb_board/fb_articleForm.do';
+	  }else{
+	    alert("로그인 후 글쓰기가 가능합니다.")
+	    location.href='${contextPath}/member/loginForm.do';
+	  }
 	}
-</script> -->
+</script>
 <body>
-	<c:choose>
-		<c:when test="${not empty memberInfo}">
-			<button type="button"
-				onclick="location.href='${contextPath}/board/fb_board/fb_articleForm.do'"
-				style="position: absolute; top: 330px; right: 160px;">글쓰기</button>
-		</c:when>
-	</c:choose>
-	
+	<h2
+		class="page-section-heading text-center text-uppercase text-secondary mb-0">자유게시판</h2>
+	<!-- Icon Divider-->
+	<div class="divider-custom">
+		<div class="divider-custom-line"></div>
+		<div class="divider-custom-icon">
+			<i class="fas fa-star"></i>
+		</div>
+		<div class="divider-custom-line"></div>
+	</div>
+
 	<section id="container">
 		<table class="table table-hover">
 			<c:choose>
@@ -84,5 +87,6 @@
 				</c:when>
 			</c:choose>
 		</table>
+		<button type="button" class="btn btn-info btn-xs" onclick="fn_articleForm(${isLogin})">글쓰기</button>
 </body>
 </html>

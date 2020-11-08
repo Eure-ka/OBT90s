@@ -121,21 +121,13 @@
           </tr>
             </c:forEach>
          </c:if>
- 
-  <tr   id="tr_btn_modify"  align="center"  >
-	   <td colspan="2"   >
-	       <input type=button value="수정반영하기"   onClick="fn_modify_article(frmArticle)"  >
-           <input type=button value="취소"  onClick="backToList(frmArticle)">
-	   </td>   
-  </tr>
-    
   <tr  id="tr_btn"    >
    <td colspan="2" align="center">
        <c:if test="${memberInfo.member_id == articleMap.article.member_id}"> 
-	      <input type=button value="수정하기" onClick="fn_modify_article('${contextPath}/board/tb_board/tb_articlemodForm.do',${articleMap.article.tb_number})">
-	      <input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/tb_board/removetrans.do' , ${articleMap.article.tb_number})">
+	      <input type=button value="수정하기" class="btn btn-info btn-sm" onClick="fn_modify_article('${contextPath}/board/tb_board/tb_articlemodForm.do',${articleMap.article.tb_number})">
+	      <input type=button value="삭제하기" class="btn btn-danger btn-sm" onClick="fn_remove_article('${contextPath}/board/tb_board/removetrans.do' , ${articleMap.article.tb_number})">
 	    </c:if>
-	    <input type=button value="리스트로 돌아가기"  onClick="backToList(this.form)">
+	    <input type=button value="리스트로 돌아가기" class="btn btn-primary btn-sm"  onClick="backToList(this.form)">
    </td>
   </tr>
  </table>

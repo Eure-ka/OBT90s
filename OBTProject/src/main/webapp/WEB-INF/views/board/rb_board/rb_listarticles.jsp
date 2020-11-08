@@ -23,8 +23,8 @@
 	}
 </script> 
 <body>
-	<h4
-		class="page-section-heading text-center text-uppercase text-secondary mb-0">신고게시판</h4>
+	<h2
+		class="page-section-heading text-center text-uppercase text-secondary mb-0">신고게시판</h2>
 	<!-- Icon Divider-->
 	<div class="divider-custom">
 		<div class="divider-custom-line"></div>
@@ -87,18 +87,9 @@
 				</c:when>
 			</c:choose>
 		</table>
-		<button class=" type="button"
-			onclick="fn_articleForm(${isLogin})">글쓰기</button>
+		<button type="button" class="btn btn-info btn-xs" onclick="fn_articleForm(${isLogin})">글쓰기</button>
 		<%-- <a href="${contextPath}/board/rb_board/rb_View.do?rb_number=${articlesList.rb_number}"><img  src="${contextPath}/download.do?rb_number=${articleMap.article.rb_number}&imageFileName=${item.imageFileName}"
-                     id="preview" style="width: 200px;height:200px" alt="게시판이미지" /></a> --%>
-
-
-
-
-
-
-
-
+                     id="preview" style="width: 200px;height:200px" alt="게시판이미지" /></a> --%
 		<%-- <div class="search row">
 			<div class="col-xs-2 col-sm-2">
 				<select name="searchType" class="form-control">

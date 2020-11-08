@@ -75,8 +75,9 @@ public class MemberController {
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		session.setAttribute("isLogin", false);
-		session.removeAttribute("memberInfo");
+		session.invalidate();
+		/* session.setAttribute("isLogin", false); */
+		/* session.removeAttribute("memberInfo"); */
 		mav.setViewName("redirect:/main.do");
 		return mav;
 	}
@@ -180,12 +181,12 @@ public class MemberController {
 		String value=request.getParameter(name);
 		memberInfoMap.put(name,value);
 	}
-	System.out.println("memberInfoMap>>>>>>>>"+memberInfoMap);
+	
 //	HttpSession session = request.getSession();
 //	MemberVO memberVO = (MemberVO) session.getAttribute("member");
 	String id = memberVO.getMember_id();
 	memberInfoMap.put("id", id);
-	
+	System.out.println("memberInfoMap>>>>>>>>"+memberInfoMap);
 	/* String articleNO=(String)articleMap.get("articleNO"); */
 	String message;
 	ResponseEntity resEnt=null;
