@@ -82,4 +82,9 @@ public class TransBoardDAOImpl implements TransBoardDAO{
 		sqlSession.selectOne("mapper.transboard.updateArticle",articleMap);
 	}
 	
+	@Override
+    public void recommend(int tb_number) throws Exception {
+		System.out.println("다오도???"+tb_number);
+        sqlSession.update("mapper.transboard.recommend", tb_number);
+    }
 }

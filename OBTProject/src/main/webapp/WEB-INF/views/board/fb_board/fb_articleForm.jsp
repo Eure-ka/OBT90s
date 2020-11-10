@@ -13,93 +13,42 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script type="text/javascript">
-   /*    function readURL(input) {
+function readURL(input) {
     if (input.files && input.files[0]) {
-    //console.log(input);
-    //console.log($(this)); //Window
-    console.log($(input)); //Window
-    console.log($(input).find('.preview'));
-    var reader = new FileReader();
-    reader.onload = function (e) {
-    $(input).parent().next().find('.preview').attr('src', e.target.result);
+       var reader = new FileReader();
+       reader.onload = function(e) {
+          $(input).parent().next().find('.preview').attr('src', e.target.result);
+       }
+       reader.readAsDataURL(input.files[0]);
     }
-    reader.readAsDataURL(input.files[0]);
-    }
-    }  */
+ }
 
-   function readURL(input) {
-      if (input.files && input.files[0]) {
-         console.log(input);
-         //console.log($(this)); //Window
-         console.log($(input)); //Window
-         console.log($(input).find('.preview'));
-         var reader = new FileReader();
-         reader.onload = function(e) {
-            $(input).parent().next().find('.preview').attr('src',
-                  e.target.result);
-         }
-         reader.readAsDataURL(input.files[0]);
-      }
-   }
+ function backToList(obj) {
+    obj.action = "${contextPath}/board/fb_board/fb_listArticles.do";
+    obj.submit();
+ }
 
-   function backToList(obj) {
-      obj.action = "${contextPath}/board/fb_board/fb_listArticles.do";
-      obj.submit();
-   }
-
-   /*    var cnt = 0;
-    function fn_addFile() {
+ var cnt=0;
+ function addFile() {
     cnt++;
-    $("#d_file")
-    .append("<br>" + "<input type='file' name='file"+cnt+"' />");
-    $("#d_file")
-    .append(
-    "<tr><td>"
-    + "<input type='file' name='file"
-    + cnt
-    + "' onchange='readURL(this);' /></td><td><img class='preview' scr='#' width=200 height=200/></td></tr>");
-    $("file_add")
-    .on(
-    "click",
-    function() {
-    $("#d_file")
-    .append(
-    "<br>"
-    + "<input type='file' name='file"+cnt+"' />")
-    cnt++;
+    $("#file-list").append("<tr><td><input type='file' name='file"+cnt+"' onchange='readURL(this);'/><a href='#this' name='file-delete'>삭제</a></td><td><img class='preview' id=file"+cnt+"' scr='#' width=200 height=200/></td></tr>");
+    $("a[name='file-delete']").on("click", function(e) {
+       e.preventDefault();
+       console.log("$this", $(this));
+       deleteFile($(this));
     });
-    } */
+ }
 
-   $(document).ready(function() {
-      $("a[name='file-delete']").on("click", function(e) {
-         e.preventDefault();
-         deleteFile($(this));
-      });
-   })
-
-   var cnt=0;
-   function addFile() {
-      cnt++;
-      $("#file-list").append("<tr><td><input type='file' name='file"+cnt+"' onchange='readURL(this);'/><a href='#this' name='file-delete' onclick='delImg(this)'>삭제</a></td><td><img class='preview' scr='#' width=200 height=200/></td></tr>");
-      //var str = "<div class='file-group'><a href='#this' name='file-delete'>삭제</a></div>";
-      //$("#file-list").append(str);
-      $("a[name='file-delete']").on("click", function(e) {
-         e.preventDefault();
-         deleteFile($(this));
-      });
-      
-   }
-
-   function deleteFile(obj) {
-      obj.parent().remove();
-   }
+ function deleteFile(obj) {
+    obj.closest('tr').remove();
+ }
 </script>
 <title>글쓰기창</title>
 </head>
 <body>
    <h1 style="text-align: center">글쓰기</h1>
    <form enctype="multipart/form-data"
-      action="${contextPath}/board/fb_board/addNewfreeboard.do"
+      action="${contextPath}/board/fb_board/addNewfree.do"
       method="post">
       <div class="row">
          <div class="col-md-6">
@@ -126,13 +75,6 @@
 
       <div class="form-group" id="file-list">
          <a href="#this" onclick="addFile()">파일추가</a>
-         <div class="file-group">
-            <input type="file" name="imageFileName" onchange="readURL(this);" /><a
-               href='#this' name='file-delete'>삭제</a>
-         </div>
-         <div>
-            <img class="preview" src="#" width=200 height=200 />
-         </div>
       </div>
       <div class="center-block" style='width: 400px' align="center">
          <input type="submit" class="btn btn-info" value="등록하기"

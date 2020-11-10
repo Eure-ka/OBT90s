@@ -36,6 +36,8 @@ import sun.java2d.opengl.WGLSurfaceData.WGLVSyncOffScreenSurfaceData;
 
 @Controller("Report_BoardController")
 @RequestMapping(value = "/board")
+
+//신고 게시판 컨트롤러
 public class Report_BoardController {
 	private static final String ARTICLE_IMAGE_REPO = "C:\\upload";
 	@Autowired
@@ -43,7 +45,7 @@ public class Report_BoardController {
 
 	@Autowired
 	private Report_boardVO report_boardvo;
-
+	
 	// 글쓰기 창 넘어가기
 	@RequestMapping(value = "/rb_board/rb_articleForm.do", method = { RequestMethod.GET, RequestMethod.POST })
 	private ModelAndView newArticleform(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -77,7 +79,7 @@ public class Report_BoardController {
 
 	// 게시판 목록 보여주기
 	@RequestMapping(value = "/rb_board/rb_listarticles.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView listarticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		List<Report_boardVO> articlesList = report_boardserivce.listArticles();
 		ModelAndView mav = new ModelAndView(viewName);
@@ -86,16 +88,18 @@ public class Report_BoardController {
 	}
 
 	// 글 보여주기
-	@RequestMapping(value = "/rb_board/rb_View.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView viewArticle(@RequestParam("rb_number") int rb_number, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
-		Map articleMap = (Map) report_boardserivce.viewArticle(rb_number);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		mav.addObject("articleMap", articleMap);
-		return mav;
-	}
+
+	   @RequestMapping(value = "/rb_board/rb_View.do", method = { RequestMethod.GET, RequestMethod.POST })
+	   public ModelAndView viewArticle(@RequestParam("rb_number") int rb_number, HttpServletRequest request,
+	         HttpServletResponse response) throws Exception {
+	      String viewName = (String) request.getAttribute("viewName");
+	      System.out.println("Controller viewarticles 입장: >>>> " + viewName);
+	      ModelAndView mav = new ModelAndView(viewName);
+	      Map<String, Object> resultMap = report_boardserivce.viewArticle(rb_number);
+	      mav.addObject("resultMap", resultMap);
+	      System.out.println("view controller>>>>" + resultMap);
+	      return mav;
+	   }
 
 	// 추천 기능
 	@RequestMapping(value = "/rb_board/recommend.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -155,7 +159,7 @@ public class Report_BoardController {
 		}
 		return resEnt;
 	}
-
+	
 	// 답글 쓰기
 	@RequestMapping(value = "/rb_board/report_boardNewReArticle.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity addnewReply(HttpServletRequest request, HttpServletResponse response) throws Exception {

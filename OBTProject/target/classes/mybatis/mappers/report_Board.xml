@@ -41,8 +41,8 @@
 
 	<insert id="insetNewReArticle" parameterType="java.util.Map">
 		<![CDATA[
-			INSERT into REPORT_BOARD(rb_level,rb_number, parent_no,rb_title, rb_content,member_id,write_date)
-			VALUES(2,#{rb_number},#{parent_no},#{rb_title},#{rb_content},#{member_id},sysdate)
+			INSERT into REPORT_BOARD(rb_level,rb_number, parent_no,rb_title, rb_content,member_id,write_date,rb_countnum,rb_likenum)
+			VALUES(2,#{rb_number},#{parent_no},#{rb_title},#{rb_content},#{member_id},sysdate,0,0)
 		]]>
 	</insert>
 

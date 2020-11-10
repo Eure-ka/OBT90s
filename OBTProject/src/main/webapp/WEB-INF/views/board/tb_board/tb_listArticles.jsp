@@ -45,7 +45,7 @@
 		</div>
 		<div class="divider-custom-line"></div>
 	</div>	
-	<section id="container">
+	
 		<table class="table table-hover">
 			<c:choose>
 				<c:when test="${articlesList ==null }">
@@ -61,26 +61,26 @@
 					<thead>
 						<tr>
 							<th>번호</th>
-							<th>작성자</th>
 							<th>제목</th>
+							<th>작성자</th>
 							<th>작성일</th>
 							<th>조회수</th>
-							<th>좋아요</th>
+							<th>추천</th>
 						</tr>
 					</thead>
 
 					<c:forEach items="${articlesList}" var="article"
 						varStatus="articleNum">
 						<tr>
-							<td>${articleNum.count}<br></td>
-							<td><c:out value="${article.member_id }" /></td>
-							<td align="left"><a
+							<td width="10%">${articleNum.count}<br></td>
+							<td width="40%" align="center"><a
 								href="${contextPath}/board/tb_board/tb_View.do?tb_number=${article.tb_number}"><c:out
 										value="${article.tb_title}" /></a></td>
-							<td><fmt:formatDate value="${article.write_date}"
+							<td width="10%"><c:out value="${article.member_id }" /></td>
+							<td width="20%"><fmt:formatDate value="${article.write_date}"
 									pattern="yyyy-MM-dd" /></td>
-							<td><c:out value="${article.tb_countnum}" /></td>
-							<td><c:out value="${article.tb_likenum}" /></td>
+							<td width="10%"><c:out value="${article.tb_countnum}" /></td>
+							<td width="10%"><c:out value="${article.tb_likenum}" /></td>
 						</tr>
 					</c:forEach>
 				</c:when>

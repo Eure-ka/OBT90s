@@ -45,21 +45,31 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		freeBoardDAO.deleteArticle(fb_number);
 	}
 
+	
 	@Transactional(isolation = Isolation.READ_COMMITTED)
 	@Override
-	public Map viewArticle(int fb_number) throws Exception {
-		Map articleMap = new HashMap();
-		FreeBoardVO freeboardvo = freeBoardDAO.selectArticle(fb_number);
+	public Map<String, Object> viewArticle(int fb_number) throws Exception {
+		FreeBoardVO freeBoardVO = freeBoardDAO.selectArticle(fb_number);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("freeBoard", freeBoardVO);
+		String boardKind = "fb";
+		List<ReplyVO> replList = replyDAO.selectAllReplyList(fb_number, boardKind);
+		resultMap.put("replList", replList);
 		List<ImageVO> imageFileList = freeBoardDAO.selectImageFileList(fb_number);
-		articleMap.put("article", freeboardvo);
-		articleMap.put("imageFileList", imageFileList);
+		resultMap.put("imageFileList", imageFileList);
 		freeBoardDAO.boardHit(fb_number);
-		return articleMap;
+		return resultMap;
 	}
-
 
 	@Override
 	public void modArticle(Map articleMap) throws Exception {
 		freeBoardDAO.updateArticle(articleMap);
 	}
+	
+	
+	@Override
+	   public void recommend(int fb_number) throws Exception {
+	      System.out.println("설마 서비스도 찍히냐?? fb_number>>>>>"+fb_number);
+	      freeBoardDAO.recommend(fb_number);
+	      }
 }

@@ -1,6 +1,7 @@
 package com.oyster.free_board.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -80,5 +81,11 @@ public class FreeBoardDAOImpl implements FreeBoardDAO {
 	public void updateArticle(Map articleMap) throws DataAccessException{
 		sqlSession.selectOne("mapper.free_board.updateArticle",articleMap);
 	}
-
+	
+	
+	@Override
+    public void recommend(int fb_number) throws Exception {
+		System.out.println("다오도???"+fb_number);
+        sqlSession.update("mapper.free_board.recommend", fb_number);
+    }
 }

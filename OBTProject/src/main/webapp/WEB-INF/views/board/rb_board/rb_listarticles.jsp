@@ -33,7 +33,7 @@
 		</div>
 		<div class="divider-custom-line"></div>
 	</div>
-	<section id="container">
+		<section id="container">
 		<table class="table table-hover">
 			<c:choose>
 				<c:when test="${articlesList ==null }">
@@ -49,20 +49,18 @@
 					<thead>
 						<tr>
 							<th>번호</th>
-							<th>작성자</th>
 							<th>제목</th>
+							<th>작성자</th>
 							<th>작성일</th>
 							<th>조회수</th>
-							<th>추천수</th>
+							<th>추천</th>
 						</tr>
 					</thead>
 
-					<c:forEach items="${articlesList}" var="article"
-						varStatus="articleNum">
+					<c:forEach items="${articlesList}" var="article" varStatus="articleNum">
 						<tr>
-							<td>${articleNum.count}<br></td>
-							<td><c:out value="${article.member_id }" /></td>
-							<td align="left"><c:choose>
+							<td width="10%">${articleNum.count}<br></td>
+							<td width="40%" align="center"><c:choose>
 									<c:when test='${article.rb_level > 1 }'>
 										<c:forEach begin="1" end="5" step="1">
 											<span style="padding-left: 8px"></span>
@@ -78,80 +76,17 @@
 												value="${article.rb_title}" /></a>
 									</c:otherwise>
 								</c:choose></td>
-							<td><fmt:formatDate value="${article.write_date}"
+							<td width="10%"><c:out value="${article.member_id }" /></td>
+							<td width="20%"><fmt:formatDate value="${article.write_date}"
 									pattern="yyyy-MM-dd" /></td>
-							<td><c:out value="${article.rb_countnum}" /></td>
-							<td><c:out value="${article.rb_likenum}" /></td>
+							<td width="10%"><c:out value="${article.rb_countnum}" /></td>
+							<td width="10%"><c:out value="${article.rb_likenum}" /></td>
 						</tr>
 					</c:forEach>
 				</c:when>
 			</c:choose>
 		</table>
 		<button type="button" class="btn btn-info btn-xs" onclick="fn_articleForm(${isLogin})">글쓰기</button>
-		<%-- <a href="${contextPath}/board/rb_board/rb_View.do?rb_number=${articlesList.rb_number}"><img  src="${contextPath}/download.do?rb_number=${articleMap.article.rb_number}&imageFileName=${item.imageFileName}"
-                     id="preview" style="width: 200px;height:200px" alt="게시판이미지" /></a> --%
-		<%-- <div class="search row">
-			<div class="col-xs-2 col-sm-2">
-				<select name="searchType" class="form-control">
-					<option value="n"
-						<c:out value="${scri.searchType == null ? 'selected' : ''}"/>>-----</option>
-					<option value="t"
-						<c:out value="${scri.searchType eq 't' ? 'selected' : ''}"/>>제목</option>
-					<option value="c"
-						<c:out value="${scri.searchType eq 'c' ? 'selected' : ''}"/>>내용</option>
-					<option value="w"
-						<c:out value="${scri.searchType eq 'w' ? 'selected' : ''}"/>>작성자</option>
-					<option value="tc"
-						<c:out value="${scri.searchType eq 'tc' ? 'selected' : ''}"/>>제목+내용</option>
-				</select>
-			</div>
-
-			<div class="col-xs-10 col-sm-10">
-				<div class="input-group">
-					<input type="text" name="keyword" id="keywordInput"
-						value="${scri.keyword}" class="form-control" /> <span
-						class="input-group-btn">
-						<button id="searchBtn" type="button" class="btn btn-default">검색</button>
-					</span>
-				</div>
-			</div>
-
-			<script>
-				$(function() {
-					$('#searchBtn').click(
-							function() {
-								self.location = "list"
-										+ '${pageMaker.makeQuery(1)}'
-										+ "&searchType="
-										+ $("select option:selected").val()
-										+ "&keyword="
-										+ encodeURIComponent($('#keywordInput')
-												.val());
-							});
-				});
-			</script>
-		</div>
-		<div class="col-md-offset-3">
-			<ul class="pagination">
-				<c:if test="${pageMaker.prev}">
-					<li><a
-						href="list${pageMaker.makeSearch(pageMaker.startPage - 1)}">이전</a></li>
-				</c:if>
-
-				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}"
-					var="idx">
-					<li
-						<c:out value="${pageMaker.cri.page == idx ? 'class=info' : ''}" />>
-						<a href="list${pageMaker.makeSearch(idx)}">${idx}</a>
-					</li>
-				</c:forEach>
-
-				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-					<li><a
-						href="list${pageMaker.makeSearch(pageMaker.endPage + 1)}">다음</a></li>
-				</c:if>
-			</ul>
-		</div> --%>
 	</section>
 </body>
 </html>

@@ -10,7 +10,7 @@ public interface Report_BoardSerivce {
 	public List<Report_boardVO> listArticles() throws Exception;
 	public void removeArticle(int rb_number) throws Exception;
 	public int addNewArticle(Map articleMap) throws Exception;
-	public Map viewArticle(int rb_number) throws Exception;
+	public Map<String, Object> viewArticle(int rb_number) throws Exception;
 	public int insertNewreply(Map replyMap)throws Exception;
 	public void modArticle(Map articleMap) throws Exception;
 	public void recommend(int rb_number) throws Exception;

@@ -14,7 +14,7 @@
 <script type="text/javascript">
 
  function backToList(obj){
- obj.action="${contextPath}/board/report_boardlist.do";
+ obj.action="${contextPath}/board/rb_board/rb_listarticles.do";
  obj.submit();
  }
  

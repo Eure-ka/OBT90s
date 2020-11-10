@@ -14,7 +14,7 @@
 		<result property="fb_countnum" column="fb_countnum" />
 		<result property="fb_write_date" column="fb_write_date" />
 	</resultMap>
-	
+
 	<resultMap id="imgResult" type="freeimageVO">
 		<result property="image_no" column="image_no" />
 		<result property="fb_number" column="fb_number" />
@@ -24,9 +24,8 @@
 
 	<select id="selectAllArticlesList" resultMap="articlesResult">
 	<![CDATA[
-		select * from free_board
+		SELECT * FROM free_board order by fb_write_date desc
 	]]>
-
 	</select>
 
 	<select id="selectArticle" resultType="freeBoardVO"
@@ -40,6 +39,12 @@
 	<select id="selectNewArticleNO" resultType="int">
 		<![CDATA[
 			SELECT  nvl(max(fb_number), 0) + 1 from free_board		
+		]]>
+	</select>
+	
+	<select id="getTotal" resultType="int">
+		<![CDATA[
+			SELECT  count(*) from free_board		
 		]]>
 	</select>
 
@@ -78,10 +83,18 @@
 	<select id="selectNewImageFileNO" resultType="int"> <![CDATA[ SELECT 
 		nvl(max(image_no),0) from image ]]>
 	</select>
-	
+
 	<update id="updateArticle" parameterType="java.util.Map">
 		update free_board
-		set fb_title=#{fb_title}, fb_content=#{fb_content}
-		where fb_number=#{fb_number}
+		set
+		fb_title=#{fb_title}, fb_content=#{fb_content}
+		where
+		fb_number=#{fb_number}
+	</update>
+	
+	<update id="recommend" parameterType="int">
+		update free_board
+		set fb_likenum = fb_likenum+1
+		where fb_number = #{fb_number}
 	</update>
 </mapper>

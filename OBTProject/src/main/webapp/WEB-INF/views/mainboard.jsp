@@ -13,7 +13,8 @@
 <title>메인게시판</title>
 </head>
 <body>
-<!-- Portfolio Section-->
+
+	 <!-- Portfolio Section-->
         <section class="page-section portfolio" id="portfolio">
             <div class="container">
                 <!-- Portfolio Section Heading-->

@@ -17,4 +17,5 @@ public interface FreeBoardDAO {
 	public void boardHit(int fb_number) throws Exception;
 	public List selectImageFileList(int fb_number) throws DataAccessException;
 	public void updateArticle(Map articleMap) throws Exception;
+	public void recommend(int fb_number) throws Exception;
 }

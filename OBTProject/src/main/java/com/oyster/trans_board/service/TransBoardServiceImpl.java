@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import com.oyster.reply.dao.ReplyDAOImpl;
+import com.oyster.reply.vo.ReplyVO;
 import com.oyster.trans_board.dao.TransBoardDAOImpl;
 import com.oyster.trans_board.vo.ImageVO;
 import com.oyster.trans_board.vo.TransBoardVO;
@@ -44,21 +45,30 @@ public class TransBoardServiceImpl implements TransBoardService {
 	}
 
 	@Transactional(isolation = Isolation.READ_COMMITTED)
-	@Override
-	public Map viewArticle(int tb_number) throws Exception {
-		Map articleMap = new HashMap();
-		TransBoardVO freeboardvo = transBoardDAO.selectArticle(tb_number);
-		List<ImageVO> imageFileList = transBoardDAO.selectImageFileList(tb_number);
-		articleMap.put("article", freeboardvo);
-		articleMap.put("imageFileList", imageFileList);
-		transBoardDAO.boardHit(tb_number);
-		return articleMap;
-	}
+	   @Override
+	   public Map<String, Object> viewArticle(int tb_number) throws Exception {
+	   TransBoardVO transBoardVO = transBoardDAO.selectArticle(tb_number);
+	      Map<String, Object> resultMap = new HashMap<String, Object>();
+	      resultMap.put("transBoard", transBoardVO);
+	      String boardKind = "tb";
+	      List<ReplyVO> replList = replyDAO.selectAllReplyList(tb_number, boardKind);
+	      resultMap.put("replList", replList);
+	      List<ImageVO> imageFileList = transBoardDAO.selectImageFileList(tb_number);
+	      resultMap.put("imageFileList", imageFileList);
+	      transBoardDAO.boardHit(tb_number);
+	      return resultMap;
+	   }
 
 
 	@Override
 	public void modArticle(Map articleMap) throws Exception {
 		transBoardDAO.updateArticle(articleMap);
 	}
+	
+	@Override
+	   public void recommend(int tb_number) throws Exception {
+	      System.out.println("설마 서비스도 찍히냐?? tb_number>>>>>"+tb_number);
+	      transBoardDAO.recommend(tb_number);
+	      }
 	
 }

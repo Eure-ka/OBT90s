@@ -1,7 +1,7 @@
 package com.oyster.reply.service;
 
-import java.util.Map;
+import com.oyster.reply.vo.ReplyVO;
 
 public interface ReplyService {
-	public int addNewReply(Map articleMap) throws Exception;
+	public int addNewReply(ReplyVO replyVO) throws Exception;
 }
