@@ -24,4 +24,32 @@
   7.조회수  
   
   8.회원정보 수정및 회원 탈퇴  
+- #### 화면구현
+  - ##### 메인화면
   
+  ![image](https://user-images.githubusercontent.com/66476875/106138820-176c9200-6119-11eb-802e-93e2d52a5d43.png)
+  
+  - ##### 로그인 화면
+  
+  ![image](https://user-images.githubusercontent.com/66476875/106139077-6fa39400-6119-11eb-8d95-d52a48833c19.png)
+  
+  - ##### 회원가입 화면
+  
+  ![image](https://user-images.githubusercontent.com/66476875/106139162-8ea22600-6119-11eb-9fb4-c88250064937.png)
+  
+  - ##### 게시판 글 목록
+  
+  ![image](https://user-images.githubusercontent.com/66476875/106139291-b7c2b680-6119-11eb-9438-d7152f4b27df.png)
+
+
+ - ##### 거래글
+ 
+ ![image](https://user-images.githubusercontent.com/66476875/106139563-11c37c00-611a-11eb-9493-f4be98b05ae2.png)
+
+  - ##### 댓글
+
+  ![image](https://user-images.githubusercontent.com/66476875/106139744-49322880-611a-11eb-9820-6a7a15868f80.png)
+  
+  - ##### 회원정보
+  
+  ![image](https://user-images.githubusercontent.com/66476875/106139874-78e13080-611a-11eb-9fba-a52062fb44cc.png)
